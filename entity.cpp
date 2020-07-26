@@ -8,12 +8,7 @@ Entity::~Entity()
 	}
 }
 
-void Entity::render()
-{
-
-}
-
-void Entity::live()
+void Entity::live(std::vector<Action*>& triggeredActions)
 {
 	for (auto component : behaviorComponents){
 		component->behave();
