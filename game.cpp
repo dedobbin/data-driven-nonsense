@@ -10,12 +10,7 @@
 Game::Game()
 {
 	visuals = new Visuals();
-
-	Entity* e = new Entity();
-	
-	//TODO: get sprite position from file
-	int entityId = addEntity(e, 0, 0, 32, 32, 0, 0, 100, 100, "spritesheet1.png");
-	e->addBehaviorComponent(new gravityComponentponent(entityId));
+	setupAssets();
 }
 
 Game::~Game()
@@ -24,6 +19,18 @@ Game::~Game()
 		delete(e);
 	}
 	delete(visuals);
+}
+
+void Game::setupAssets()
+{
+	//TODO: read from file
+
+	Entity* player = new Entity();
+	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
+	player->addBehaviorComponent(new gravityComponentponent(entityId));
+
+	Entity* solid = new Entity();
+	entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
 }
 
 void Game::go()
