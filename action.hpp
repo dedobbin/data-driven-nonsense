@@ -3,7 +3,7 @@
 
 enum actionType_t
 {
-	PLACEHOLDER
+	MOVE_ENTITY
 };
 
 class Action 
@@ -11,6 +11,15 @@ class Action
 	public:
 		Action(actionType_t type);
 		const actionType_t type;
+};
+
+class MoveEntityAction : public Action
+{
+	public:
+		MoveEntityAction(int entityType, int speed, int dir);
+		const int speed;
+		const int dir;
+		const int entityId;
 };
 
 #endif

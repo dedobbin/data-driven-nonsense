@@ -1,5 +1,5 @@
 #include "behavior_component.hpp"
 
-BehaviorComponent::BehaviorComponent(Entity* owner)
-:owner(owner)
+BehaviorComponent::BehaviorComponent(int ownerEntityId)
+: ownerEntityId(ownerEntityId)
 {}
