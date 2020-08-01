@@ -29,7 +29,7 @@ void Game::setupAssets()
 	Entity* player = new Entity();
 	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
 	player->addBehaviorComponent(new GravityComponent(player));
-	player->addBehaviorComponent(new CollisionComponent(player, entities));
+	player->addBehaviorComponent(new CollisionComponent(player, &entities));
 
 	Entity* solid = new Entity();
 	entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
