@@ -6,8 +6,10 @@
 class CollisionComponent : public BehaviorComponent
 {
 	public:
-		CollisionComponent(int ownerEntityId);
+		CollisionComponent(Entity* owner, std::vector<Entity*> colliders);
 		void behave(std::vector<Action*>& actions);
+	private:
+		std::vector<Entity*> colliders;
 };
 
 #endif

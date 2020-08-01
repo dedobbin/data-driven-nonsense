@@ -1,12 +1,14 @@
 #include <iostream>
 #include "collision_component.hpp"
+#include "entity.hpp"
 
-CollisionComponent::CollisionComponent(int ownerEntityId)
-: BehaviorComponent(ownerEntityId)
+
+CollisionComponent::CollisionComponent(Entity* owner, std::vector<Entity*> colliders)
+: BehaviorComponent(owner), colliders(colliders)
 {}
 
 void CollisionComponent::behave(std::vector<Action*>& actions)
 {
-	std::cout << "TODO: check for collision" << std::endl; 
+
 }
 

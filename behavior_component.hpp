@@ -4,14 +4,14 @@
 #include <vector>
 #include "action.hpp"
 
-typedef int componentId_t; 
+class Entity;
 
 class BehaviorComponent
 {
 	public:
-		BehaviorComponent(int ownerEntityId);
+		BehaviorComponent(Entity* owner);
 		virtual void behave(std::vector<Action*> &triggeredAction) = 0;
-		const int ownerEntityId;
+		Entity* const owner;
 };
 
 #endif

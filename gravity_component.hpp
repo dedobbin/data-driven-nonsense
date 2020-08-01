@@ -6,7 +6,7 @@
 class GravityComponent : public BehaviorComponent
 {
 	public:
-		GravityComponent(int ownerEntityId);
+		GravityComponent(Entity* owner);
 		void behave(std::vector<Action*>& actions);
 	private:
 		float acceleration = 0;
