@@ -18,7 +18,7 @@ class Sprite
 		Sprite(SDL_Rect src, SDL_Rect pos, SDL_Texture* texture);
 		~Sprite();
 		const SDL_Rect src;
-		const SDL_Rect pos;
+		SDL_Rect pos;
 		SDL_Texture* const texture = NULL;
 
 };
@@ -31,6 +31,7 @@ class Visuals
 		void renderSprite(Sprite* sprite);
 		void render();
 		int addSprite(SDL_Rect src, SDL_Rect pos, std::string spritesheetStr);
+		Sprite* getSprite(int spriteId);
 	
 	private:
 		bool initSDL();

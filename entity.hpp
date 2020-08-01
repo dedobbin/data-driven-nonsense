@@ -3,18 +3,19 @@
 
 #include <vector>
 #include <SDL2/SDL.h>
-#include "behavior_component.hpp"
 #include "action.hpp"
+#include "behavior_component.hpp"
 #include "entity.hpp"
 
-typedef int entityId_t;
 
 class Entity
 {
 	public:
 		~Entity();
 		void live(std::vector<Action*>& triggeredActions);
-		componentId_t addBehaviorComponent(BehaviorComponent* component);
+		int addBehaviorComponent(BehaviorComponent* component);
+		int getSpriteId();
+		void setSpriteId(int id);
 	private:
 		std::vector<BehaviorComponent*> behaviorComponents;	
 		int spriteId = -1;

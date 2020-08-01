@@ -1,18 +1,17 @@
 #ifndef __BEHAVIOR_COMPONENT__
 #define __BEHAVIOR_COMPONENT__
 
-//Forward declaration because circ dep
-class Entity;
+#include <vector>
+#include "action.hpp"
 
 typedef int componentId_t; 
 
 class BehaviorComponent
 {
 	public:
-		BehaviorComponent(Entity* owner);
-		virtual void behave() = 0;
-	private:
-		Entity* owner;
+		BehaviorComponent(int ownerEntityId);
+		virtual void behave(std::vector<Action*> &triggeredAction) = 0;
+		const int ownerEntityId;
 };
 
 #endif

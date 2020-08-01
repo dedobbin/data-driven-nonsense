@@ -12,9 +12,10 @@ Game::Game()
 	visuals = new Visuals();
 
 	Entity* e = new Entity();
-	e->addBehaviorComponent(new GravityComponent(e));
+	
 	//TODO: get sprite position from file
-	addEntity(e, 0, 0, 32, 32, 0, 0, 100, 100, "spritesheet1.png");
+	int entityId = addEntity(e, 0, 0, 32, 32, 0, 0, 100, 100, "spritesheet1.png");
+	e->addBehaviorComponent(new GravityComponent(entityId));
 }
 
 Game::~Game()
@@ -54,7 +55,26 @@ void Game::go()
 		}
 
 		for (auto action : triggeredActions){
-			//TODO: process actions
+			switch (action->type){
+				case MOVE_ENTITY: {
+					auto moveEntityAction = (MoveEntityAction*) action;
+					Entity* e = entities[moveEntityAction->entityId];
+					Sprite* s = visuals->getSprite(e->getSpriteId());
+					int speed = moveEntityAction->speed;
+					if (moveEntityAction->dir == 0){
+						s->pos.y -= speed;
+					} else if (moveEntityAction->dir == 1){
+						s->pos.x += speed;
+					} else if (moveEntityAction->dir == 2){
+						s->pos.y += speed;
+					} else if (moveEntityAction->dir == 3){
+						s->pos.x -= speed;
+					} 
+					break;
+				}
+				default: 
+					std::cerr << "Unknown action type " << action->type << std::endl;
+			}
 		}
 
 		visuals->render();
@@ -63,7 +83,7 @@ void Game::go()
 		if( avgFps > 2000000 ){
 			avgFps = 0;
 		}
-		std::cout << "FPS: " << avgFps << std::endl;
+		//std::cout << "FPS: " << avgFps << std::endl;
 		++countedFrames;
 		int frameTicks = capTimer.getTicks();
 		if( frameTicks < SCREEN_TICK_PER_FRAME ){
@@ -73,13 +93,14 @@ void Game::go()
 	}
 }
 
-entityId_t Game::addEntity(Entity* entity, 
+int Game::addEntity(Entity* entity, 
 	int srcX, int srcY, int srcW, int srcH,
 	int posX, int posY, int posW, int posH,
 	std::string spritesheetStr
 )
 {
 	int spriteId = visuals->addSprite({srcX, srcY, srcW, srcH}, {posX, posY, posW, posH}, spritesheetStr);
+	entity->setSpriteId(spriteId);
 	entities.push_back(entity);
 	return entities.size() - 1;
 }

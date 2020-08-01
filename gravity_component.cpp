@@ -1,11 +1,12 @@
 #include <iostream>
 #include "gravity_component.hpp"
 
-GravityComponent::GravityComponent(Entity* e)
-: BehaviorComponent(e)
+GravityComponent::GravityComponent(int ownerEntityId)
+:BehaviorComponent(ownerEntityId)
 {}
 
-void GravityComponent::behave()
+void GravityComponent::behave(std::vector<Action*> &actions)
 {
-	std::cout << "gravity" << std::endl;
+	acceleration += force / mass;
+	actions.push_back(new MoveEntityAction(ownerEntityId, acceleration, dir));
 }

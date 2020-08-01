@@ -13,7 +13,7 @@ class Game
 		Game();
 		~Game();
 		void go();
-		entityId_t addEntity(Entity* entity, 
+		int addEntity(Entity* entity, 
 			int srcX, int srcY, int srcW, int srcH,
 			int posX, int posY, int posW, int posH,
 			std::string spritesheetStr
