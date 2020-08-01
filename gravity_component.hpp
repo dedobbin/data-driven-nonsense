@@ -3,10 +3,10 @@
 
 #include "behavior_component.hpp"
 
-class gravityComponentponent : public BehaviorComponent
+class GravityComponent : public BehaviorComponent
 {
 	public:
-		gravityComponentponent(int ownerEntityId);
+		GravityComponent(int ownerEntityId);
 		void behave(std::vector<Action*>& actions);
 	private:
 		float acceleration = 0;

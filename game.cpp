@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h> 
 #include <SDL2/SDL_ttf.h>
 #include "gravity_component.hpp"
+#include "collision_component.hpp"
 #include "visuals.hpp"
 #include "game.hpp"
 
@@ -27,7 +28,8 @@ void Game::setupAssets()
 
 	Entity* player = new Entity();
 	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
-	player->addBehaviorComponent(new gravityComponentponent(entityId));
+	player->addBehaviorComponent(new GravityComponent(entityId));
+	player->addBehaviorComponent(new CollisionComponent(entityId));
 
 	Entity* solid = new Entity();
 	entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
