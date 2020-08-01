@@ -19,6 +19,7 @@ class Entity
 		void setId(int id);
 		int getSpriteId();
 		void setSpriteId(int id);
+		SDL_Rect pos;
 	private:
 		std::vector<BehaviorComponent*> behaviorComponents;	
 		int spriteId = -1;

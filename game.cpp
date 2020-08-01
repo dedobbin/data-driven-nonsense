@@ -68,16 +68,15 @@ void Game::go()
 				case MOVE_ENTITY: {
 					auto moveEntityAction = (MoveEntityAction*) action;
 					Entity* e = entities[moveEntityAction->entityId];
-					Sprite* s = visuals->getSprite(e->getSpriteId());
 					int speed = moveEntityAction->speed;
 					if (moveEntityAction->dir == 0){
-						s->pos.y -= speed;
+						e->pos.y -= speed;
 					} else if (moveEntityAction->dir == 1){
-						s->pos.x += speed;
+						e->pos.x += speed;
 					} else if (moveEntityAction->dir == 2){
-						s->pos.y += speed;
+						e->pos.y += speed;
 					} else if (moveEntityAction->dir == 3){
-						s->pos.x -= speed;
+						e->pos.x -= speed;
 					} 
 					break;
 				}
@@ -108,7 +107,12 @@ int Game::addEntity(Entity* entity,
 	std::string spritesheetStr
 )
 {
-	int spriteId = visuals->addSprite({srcX, srcY, srcW, srcH}, {posX, posY, posW, posH}, spritesheetStr);
+	entity->pos.w = posW;
+	entity->pos.h = posH;
+	entity->pos.x = posX;
+	entity->pos.y = posY;
+
+	int spriteId = visuals->addSprite({srcX, srcY, srcW, srcH}, &entity->pos, spritesheetStr);
 	entity->setSpriteId(spriteId);
 	entities.push_back(entity);
 	

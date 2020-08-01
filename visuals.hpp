@@ -15,10 +15,10 @@
 class Sprite
 {
 	public:
-		Sprite(SDL_Rect src, SDL_Rect pos, SDL_Texture* texture);
+		Sprite(SDL_Rect src, SDL_Rect* pos, SDL_Texture* texture);
 		~Sprite();
 		const SDL_Rect src;
-		SDL_Rect pos;
+		SDL_Rect* pos;	//Owned by entity TODO: smart pointers
 		SDL_Texture* const texture = NULL;
 
 };
@@ -30,7 +30,7 @@ class Visuals
 		~Visuals();
 		void renderSprite(Sprite* sprite);
 		void render();
-		int addSprite(SDL_Rect src, SDL_Rect pos, std::string spritesheetStr);
+		int addSprite(SDL_Rect src, SDL_Rect* pos, std::string spritesheetStr);
 		Sprite* getSprite(int spriteId);
 	
 	private:

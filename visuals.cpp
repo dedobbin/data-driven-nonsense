@@ -2,7 +2,7 @@
 #include <dirent.h>
 #include "visuals.hpp"
 
-Sprite::Sprite(SDL_Rect src, SDL_Rect pos, SDL_Texture* texture)
+Sprite::Sprite(SDL_Rect src, SDL_Rect* pos, SDL_Texture* texture)
 :src(src), pos(pos), texture(texture)
 {}
 
@@ -147,7 +147,7 @@ void Visuals::render()
 
 	for (auto sprite : sprites){
 		//if (SDL_RenderCopyEx( renderer, sprite->texture, &sprite->src, &sprite->pos , NULL, NULL, sprite->flip) < 0){
-		if (SDL_RenderCopy( renderer, sprite->texture, &sprite->src, &sprite->pos) < 0){
+		if (SDL_RenderCopy( renderer, sprite->texture, &sprite->src, sprite->pos) < 0){
 			std::cerr << "Failed to render sprite " << std::endl;
 		}
 	}
@@ -156,7 +156,7 @@ void Visuals::render()
 
 }
 
-int Visuals::addSprite(SDL_Rect src, SDL_Rect pos, std::string spritesheetName)
+int Visuals::addSprite(SDL_Rect src, SDL_Rect* pos, std::string spritesheetName)
 {
 	SDL_Texture* spritesheet = spritesheets[spritesheetName];
 	sprites.push_back(new Sprite(src, pos, spritesheet));
