@@ -162,8 +162,3 @@ int Visuals::addSprite(SDL_Rect src, SDL_Rect* pos, std::string spritesheetName)
 	sprites.push_back(new Sprite(src, pos, spritesheet));
 	return sprites.size() - 1;
 }
-		
-Sprite* Visuals::getSprite(int spriteId)
-{
-	return sprites[spriteId];
-}

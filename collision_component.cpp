@@ -55,7 +55,7 @@ CollisionComponent::CollisionComponent(Entity* owner, std::vector<Entity*>* coll
 void CollisionComponent::behave(std::vector<Action*>& actions)
 {
 	for (auto collider: *colliders){
-		if (collider->getId() == owner->getId()){
+		if (collider->id == owner->id){
 			continue;
 		}
 		if (collision(owner->pos, collider->pos)){
