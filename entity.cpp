@@ -15,18 +15,8 @@ void Entity::live(std::vector<Action*>& triggeredActions)
 	}
 }
 
-componentId_t Entity::addBehaviorComponent(BehaviorComponent* component)
+int Entity::addBehaviorComponent(BehaviorComponent* component)
 {
 	behaviorComponents.push_back(component);
 	return behaviorComponents.size() - 1;
-}
-
-int Entity::getSpriteId()
-{
-	return spriteId;
-}
-
-void Entity::setSpriteId(int val)
-{
-	spriteId = val;
 }

@@ -12,6 +12,7 @@ class Game
 	public:
 		Game();
 		~Game();
+		void setupAssets();
 		void go();
 		int addEntity(Entity* entity, 
 			int srcX, int srcY, int srcW, int srcH,

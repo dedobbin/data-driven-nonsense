@@ -14,11 +14,11 @@ class Entity
 		~Entity();
 		void live(std::vector<Action*>& triggeredActions);
 		int addBehaviorComponent(BehaviorComponent* component);
-		int getSpriteId();
-		void setSpriteId(int id);
+		int spriteId = -1;
+		int id = -1;
+		SDL_Rect pos;
 	private:
 		std::vector<BehaviorComponent*> behaviorComponents;	
-		int spriteId = -1;
 };
 
 #endif

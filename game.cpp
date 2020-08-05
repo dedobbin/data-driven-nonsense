@@ -4,18 +4,14 @@
 #include <SDL2/SDL.h> 
 #include <SDL2/SDL_ttf.h>
 #include "gravity_component.hpp"
+#include "collision_component.hpp"
 #include "visuals.hpp"
 #include "game.hpp"
 
 Game::Game()
 {
 	visuals = new Visuals();
-
-	Entity* e = new Entity();
-	
-	//TODO: get sprite position from file
-	int entityId = addEntity(e, 0, 0, 32, 32, 0, 0, 100, 100, "spritesheet1.png");
-	e->addBehaviorComponent(new GravityComponent(entityId));
+	setupAssets();
 }
 
 Game::~Game()
@@ -24,6 +20,19 @@ Game::~Game()
 		delete(e);
 	}
 	delete(visuals);
+}
+
+void Game::setupAssets()
+{
+	//TODO: read from file
+
+	Entity* player = new Entity();
+	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
+	player->addBehaviorComponent(new GravityComponent(player));
+	player->addBehaviorComponent(new CollisionComponent(player, &entities));
+
+	Entity* solid = new Entity();
+	entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
 }
 
 void Game::go()
@@ -59,16 +68,15 @@ void Game::go()
 				case MOVE_ENTITY: {
 					auto moveEntityAction = (MoveEntityAction*) action;
 					Entity* e = entities[moveEntityAction->entityId];
-					Sprite* s = visuals->getSprite(e->getSpriteId());
 					int speed = moveEntityAction->speed;
 					if (moveEntityAction->dir == 0){
-						s->pos.y -= speed;
+						e->pos.y -= speed;
 					} else if (moveEntityAction->dir == 1){
-						s->pos.x += speed;
+						e->pos.x += speed;
 					} else if (moveEntityAction->dir == 2){
-						s->pos.y += speed;
+						e->pos.y += speed;
 					} else if (moveEntityAction->dir == 3){
-						s->pos.x -= speed;
+						e->pos.x -= speed;
 					} 
 					break;
 				}
@@ -99,8 +107,16 @@ int Game::addEntity(Entity* entity,
 	std::string spritesheetStr
 )
 {
-	int spriteId = visuals->addSprite({srcX, srcY, srcW, srcH}, {posX, posY, posW, posH}, spritesheetStr);
-	entity->setSpriteId(spriteId);
+	entity->pos.w = posW;
+	entity->pos.h = posH;
+	entity->pos.x = posX;
+	entity->pos.y = posY;
+
+	int spriteId = visuals->addSprite({srcX, srcY, srcW, srcH}, &entity->pos, spritesheetStr);
+	entity->spriteId = spriteId;
 	entities.push_back(entity);
-	return entities.size() - 1;
+	
+	int id = entities.size() - 1;
+	entity->id = id;
+	return id;
 }
