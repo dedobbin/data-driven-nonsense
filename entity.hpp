@@ -12,7 +12,7 @@ class Entity
 {
 	public:
 		~Entity();
-		void live(std::vector<Action*>& triggeredActions);
+		void live();
 		int addBehaviorComponent(BehaviorComponent* component);
 		int spriteId = -1;
 		int id = -1;

@@ -23,7 +23,6 @@ class Game
 		std::vector<Entity*> entities;
 		bool initSDL();
 		Visuals* visuals;
-		std::vector<Action*> triggeredActions;
 
 		LazyFooTimer capTimer;
 		LazyFooTimer fpsTimer;

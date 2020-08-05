@@ -7,9 +7,8 @@ class GravityComponent : public BehaviorComponent
 {
 	public:
 		GravityComponent(Entity* owner);
-		void behave(std::vector<Action*>& actions);
+		void behave();
 	private:
-		float acceleration = 0;
 		float force = 0.5;	//force of gravity
 		float mass = 1;
 		int dir = 2;

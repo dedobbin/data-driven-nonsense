@@ -3,7 +3,7 @@
 
 enum actionType_t
 {
-	MOVE_ENTITY
+	SPEED_INCREASE
 };
 
 class Action 
@@ -13,13 +13,12 @@ class Action
 		const actionType_t type;
 };
 
-class MoveEntityAction : public Action
+class SpeedIncreaseAction : public Action
 {
 	public:
-		MoveEntityAction(int entityType, int speed, int dir);
+		SpeedIncreaseAction(int speed, int dir);
 		const int speed;
 		const int dir;
-		const int entityId;
 };
 
 #endif

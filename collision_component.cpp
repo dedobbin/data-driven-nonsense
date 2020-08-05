@@ -52,14 +52,14 @@ CollisionComponent::CollisionComponent(Entity* owner, std::vector<Entity*>* coll
 : BehaviorComponent(owner), colliders(colliders)
 {}
 
-void CollisionComponent::behave(std::vector<Action*>& actions)
+void CollisionComponent::behave()
 {
 	for (auto collider: *colliders){
 		if (collider->id == owner->id){
 			continue;
 		}
 		if (collision(owner->pos, collider->pos)){
-			std::cout << "collision " << std::endl;
+			std::cout << "TODO: broadcast collision action " << std::endl;
 		}
 	}
 }

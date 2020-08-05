@@ -7,7 +7,7 @@ class CollisionComponent : public BehaviorComponent
 {
 	public:
 		CollisionComponent(Entity* owner, std::vector<Entity*>* colliders);
-		void behave(std::vector<Action*>& actions);
+		void behave();
 	private:
 		std::vector<Entity*>* colliders; //game is owner
 };

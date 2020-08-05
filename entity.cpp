@@ -8,10 +8,10 @@ Entity::~Entity()
 	}
 }
 
-void Entity::live(std::vector<Action*>& triggeredActions)
+void Entity::live()
 {
 	for (auto component : behaviorComponents){
-		component->behave(triggeredActions);
+		component->behave();
 	}
 }
 

@@ -7,8 +7,12 @@ GravityComponent::GravityComponent(Entity* owner)
 :BehaviorComponent(owner)
 {}
 
-void GravityComponent::behave(std::vector<Action*> &actions)
+void GravityComponent::behave()
 {
-	acceleration += force / mass;
-	actions.push_back(new MoveEntityAction(owner->id, acceleration, dir));
+	//TODO: speed and mass should come from constructor, so can come from physics component
+	int speedIncrease = force / mass;
+	auto a = new SpeedIncreaseAction(speedIncrease, dir);
+	for(auto o : observers ){
+		o->notify(a);
+	}
 }

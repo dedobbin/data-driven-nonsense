@@ -5,6 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "gravity_component.hpp"
 #include "collision_component.hpp"
+#include "physics_component.hpp"
 #include "visuals.hpp"
 #include "game.hpp"
 
@@ -28,8 +29,17 @@ void Game::setupAssets()
 
 	Entity* player = new Entity();
 	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
-	player->addBehaviorComponent(new GravityComponent(player));
-	player->addBehaviorComponent(new CollisionComponent(player, &entities));
+	
+	auto gravity = new GravityComponent(player);
+	player->addBehaviorComponent(gravity);
+
+	auto physics = new PhysicsComponent(player);
+	gravity->addObserver(physics);
+	player->addBehaviorComponent(gravity);
+
+	auto collision = new CollisionComponent(player, &entities);
+	physics->addObserver(collision);
+	player->addBehaviorComponent(collision);
 
 	Entity* solid = new Entity();
 	entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
@@ -47,11 +57,6 @@ void Game::go()
 	while(keepGoing){
 		capTimer.start();
 
-		for (auto action : triggeredActions){
-			delete(action);
-		} 
-		triggeredActions = {};
-
 		SDL_Event e;
 		while( SDL_PollEvent( &e ) != 0 ){
 			if (e.type == SDL_QUIT){
@@ -60,29 +65,7 @@ void Game::go()
 		}
 
 		for (auto e : entities){
-			e->live(triggeredActions);
-		}
-
-		for (auto action : triggeredActions){
-			switch (action->type){
-				case MOVE_ENTITY: {
-					auto moveEntityAction = (MoveEntityAction*) action;
-					Entity* e = entities[moveEntityAction->entityId];
-					int speed = moveEntityAction->speed;
-					if (moveEntityAction->dir == 0){
-						e->pos.y -= speed;
-					} else if (moveEntityAction->dir == 1){
-						e->pos.x += speed;
-					} else if (moveEntityAction->dir == 2){
-						e->pos.y += speed;
-					} else if (moveEntityAction->dir == 3){
-						e->pos.x -= speed;
-					} 
-					break;
-				}
-				default: 
-					std::cerr << "Unknown action type " << action->type << std::endl;
-			}
+			e->live();
 		}
 
 		visuals->render();
