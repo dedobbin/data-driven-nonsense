@@ -2,9 +2,7 @@
 #include "gravity_component.hpp"
 #include "entity.hpp"
 
-
-GravityComponent::GravityComponent(Entity* owner)
-:BehaviorComponent(owner)
+GravityComponent::GravityComponent()
 {}
 
 void GravityComponent::behave()

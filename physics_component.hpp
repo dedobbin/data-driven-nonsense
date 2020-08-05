@@ -6,7 +6,6 @@
 class PhysicsComponent : public BehaviorComponent
 {
 	public:
-		PhysicsComponent(Entity* owner);
 		void behave();
 		void notify(Action* action);
 

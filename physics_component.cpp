@@ -2,11 +2,6 @@
 #include "physics_component.hpp"
 
 
-PhysicsComponent::PhysicsComponent(Entity* owner)
-: BehaviorComponent(owner)
-{
-
-}
 void PhysicsComponent::behave()
 {
 

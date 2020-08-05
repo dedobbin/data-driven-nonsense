@@ -9,7 +9,9 @@ class CollisionComponent : public BehaviorComponent
 		CollisionComponent(Entity* owner, std::vector<Entity*>* colliders);
 		void behave();
 	private:
+		const Entity* const owner;
 		std::vector<Entity*>* colliders; //game is owner
+		int ownerEntityId;
 };
 
 #endif

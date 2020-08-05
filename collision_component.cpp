@@ -2,6 +2,7 @@
 #include "collision_component.hpp"
 #include "entity.hpp"
 
+
 bool collision(SDL_Rect A, SDL_Rect B)
 {
 	//thnx lazy foo
@@ -49,7 +50,7 @@ bool collision(SDL_Rect A, SDL_Rect B)
 }
 
 CollisionComponent::CollisionComponent(Entity* owner, std::vector<Entity*>* colliders)
-: BehaviorComponent(owner), colliders(colliders)
+: owner(owner), colliders(colliders)
 {}
 
 void CollisionComponent::behave()

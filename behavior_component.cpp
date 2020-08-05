@@ -2,10 +2,6 @@
 #include "behavior_component.hpp"
 #include <iostream>
 
-BehaviorComponent::BehaviorComponent(Entity* owner)
-: owner(owner)
-{}
-
 int BehaviorComponent::addObserver(Observer* observer)
 {
 	int id = observers.size();

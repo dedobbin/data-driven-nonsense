@@ -30,10 +30,10 @@ void Game::setupAssets()
 	Entity* player = new Entity();
 	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
 	
-	auto gravity = new GravityComponent(player);
+	auto gravity = new GravityComponent();
 	player->addBehaviorComponent(gravity);
 
-	auto physics = new PhysicsComponent(player);
+	auto physics = new PhysicsComponent();
 	gravity->addObserver(physics);
 	player->addBehaviorComponent(gravity);
 

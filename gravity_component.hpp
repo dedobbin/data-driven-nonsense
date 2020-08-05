@@ -6,7 +6,7 @@
 class GravityComponent : public BehaviorComponent
 {
 	public:
-		GravityComponent(Entity* owner);
+		GravityComponent();
 		void behave();
 	private:
 		float force = 0.5;	//force of gravity
