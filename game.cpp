@@ -29,8 +29,9 @@ void Game::setupAssets()
 
 	Entity* player = new Entity();
 	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
-	
-	auto gravity = new GravityComponent();
+	float playerMass = 1.0;
+
+	auto gravity = new GravityComponent(playerMass);
 	player->addBehaviorComponent(gravity);
 
 	auto physics = new PhysicsComponent();

@@ -8,7 +8,9 @@ class PhysicsComponent : public BehaviorComponent
 	public:
 		void behave();
 		void notify(Action* action);
-
+	private:
+		float xSpeed;
+		float ySpeed;
 };
 
 #endif

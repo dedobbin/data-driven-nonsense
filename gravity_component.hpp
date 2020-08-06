@@ -6,11 +6,11 @@
 class GravityComponent : public BehaviorComponent
 {
 	public:
-		GravityComponent();
+		GravityComponent(float mass);
 		void behave();
 	private:
 		float force = 0.5;	//force of gravity
-		float mass = 1;
+		const float mass;
 		int dir = 2;
 };
 

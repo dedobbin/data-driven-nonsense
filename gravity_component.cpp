@@ -2,7 +2,8 @@
 #include "gravity_component.hpp"
 #include "entity.hpp"
 
-GravityComponent::GravityComponent()
+GravityComponent::GravityComponent(float mass)
+: mass(mass)
 {}
 
 void GravityComponent::behave()
