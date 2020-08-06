@@ -18,8 +18,8 @@ class Action
 class SpeedIncreaseAction : public Action
 {
 	public:
-		SpeedIncreaseAction(int speed, int dir);
-		const int speed;
+		SpeedIncreaseAction(float speed, int dir);
+		const float speed;
 		const int dir;
 };
 

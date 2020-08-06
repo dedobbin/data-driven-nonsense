@@ -5,10 +5,10 @@
 #include <SDL2/SDL.h>
 #include "action.hpp"
 #include "behavior_component.hpp"
+#include "observer.hpp"
 #include "entity.hpp"
 
-
-class Entity
+class Entity : public Observer
 {
 	public:
 		~Entity();
@@ -17,6 +17,7 @@ class Entity
 		int spriteId = -1;
 		int id = -1;
 		SDL_Rect pos;
+		void notify(Action* action);
 	private:
 		std::vector<BehaviorComponent*> behaviorComponents;	
 };

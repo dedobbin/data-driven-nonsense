@@ -11,5 +11,5 @@ int BehaviorComponent::addObserver(Observer* observer)
 
 void BehaviorComponent::notify(Action* action)
 {
-	std::cerr << "base BehaviorComponent got notified:" << action->type << std::endl;
+	std::cerr << "base BehaviorComponent got notified: " << action->type << std::endl;
 }

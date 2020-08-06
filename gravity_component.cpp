@@ -8,8 +8,7 @@ GravityComponent::GravityComponent(float mass)
 
 void GravityComponent::behave()
 {
-	//TODO: speed and mass should come from constructor, so can come from physics component
-	int speedIncrease = force / mass;
+	float speedIncrease = force / mass;
 	auto a = new SpeedIncreaseAction(speedIncrease, dir);
 	for(auto o : observers ){
 		o->notify(a);

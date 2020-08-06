@@ -27,6 +27,7 @@ void Game::setupAssets()
 {
 	//TODO: read from file
 
+	/** player **/
 	Entity* player = new Entity();
 	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
 	float playerMass = 1.0;
@@ -36,12 +37,13 @@ void Game::setupAssets()
 
 	auto physics = new PhysicsComponent();
 	gravity->addObserver(physics);
-	player->addBehaviorComponent(gravity);
+	player->addBehaviorComponent(physics);
+	physics->addObserver(player);
 
 	auto collision = new CollisionComponent(player, &entities);
-	physics->addObserver(collision);
 	player->addBehaviorComponent(collision);
 
+	/** some solid **/
 	Entity* solid = new Entity();
 	entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
 }
