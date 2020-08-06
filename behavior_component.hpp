@@ -5,8 +5,6 @@
 #include "action.hpp"
 #include "observer.hpp"
 
-class Entity;
-
 class BehaviorComponent : public Observer
 {
 	public:

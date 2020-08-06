@@ -3,6 +3,8 @@
 
 #include "behavior_component.hpp"
 
+class Entity;
+
 class CollisionComponent : public BehaviorComponent
 {
 	public:

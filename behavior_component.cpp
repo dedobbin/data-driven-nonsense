@@ -1,4 +1,3 @@
-#include "entity.hpp"
 #include "behavior_component.hpp"
 #include <iostream>
 
