@@ -11,41 +11,32 @@
 
 Game::Game()
 {
-	visuals = new Visuals();
+	visuals = std::make_unique<Visuals>();
 	setupAssets();
 }
-
-Game::~Game()
-{
-	for (auto e : entities){
-		delete(e);
-	}
-	delete(visuals);
-}
-
 void Game::setupAssets()
 {
 	//TODO: read from file
 
 	/** player **/
-	Entity* player = new Entity();
+	std::shared_ptr<Entity> player = std::make_shared<Entity>();
 	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
 	float playerMass = 1.0;
 
-	auto gravity = new GravityComponent(playerMass);
+	auto gravity = std::make_shared<GravityComponent>(playerMass);
 	player->addBehaviorComponent(gravity);
 
-	auto physics = new PhysicsComponent();
+	auto physics = std::make_shared<PhysicsComponent>();
 	gravity->addObserver(physics);
 	player->addBehaviorComponent(physics);
 	physics->addObserver(player);
 
-	auto collision = new CollisionComponent(player, &entities, &collisionMap);
+	auto collision = std::make_shared<CollisionComponent>(player, &entities, &collisionMap);
 	player->addBehaviorComponent(collision);
 	collision->addObserver(physics);
 
 	/** some solid **/
-	Entity* solid = new Entity();
+	auto solid = std::make_shared<Entity>();
 	entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
 	collisionMap[entityId] = SOLID;
 }
@@ -89,7 +80,7 @@ void Game::go()
 	}
 }
 
-int Game::addEntity(Entity* entity, 
+int Game::addEntity(std::shared_ptr<Entity> entity, 
 	int srcX, int srcY, int srcW, int srcH,
 	int posX, int posY, int posW, int posH,
 	std::string spritesheetStr

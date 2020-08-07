@@ -10,7 +10,7 @@ class PhysicsComponent : public BehaviorComponent
 {
 	public:
 		void behave();
-		void notify(Action* action);
+		void notify(std::shared_ptr<Action> action);
 	private:
 		float xSpeed;
 		float ySpeed;

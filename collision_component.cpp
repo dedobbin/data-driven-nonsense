@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include "collision_component.hpp"
 #include "entity.hpp"
 
@@ -50,7 +51,8 @@ bool collision(SDL_Rect A, SDL_Rect B)
 }
 
 CollisionComponent::CollisionComponent(
-	Entity* owner, std::vector<Entity*>* colliders, 
+	std::shared_ptr<Entity> owner, 
+	std::vector<std::shared_ptr<Entity>>* colliders, 
 	std::unordered_map<int, collisionActionType_t>* collisionMap
 )
 : owner(owner), colliders(colliders), collisionMap(collisionMap)
@@ -65,7 +67,7 @@ void CollisionComponent::behave()
 		if (collision(owner->pos, collider->pos)){
 			collisionActionType_t collisionType = (*collisionMap)[collider->id];
 			if (collisionType != NONE){
-				CollisionAction* action = new CollisionAction(collisionType);
+				auto action = std::make_shared<CollisionAction>(collisionType);
 				notifyAll(action);
 			}
 		}

@@ -9,6 +9,6 @@ GravityComponent::GravityComponent(float mass)
 void GravityComponent::behave()
 {
 	float speedIncrease = force / mass;
-	auto a = new SpeedIncreaseAction(speedIncrease, dir);
+	auto a = std::make_shared<SpeedIncreaseAction>(speedIncrease, dir);
 	notifyAll(a);
 }

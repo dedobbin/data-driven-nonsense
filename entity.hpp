@@ -11,15 +11,14 @@
 class Entity : public Observer
 {
 	public:
-		~Entity();
 		void live();
-		int addBehaviorComponent(BehaviorComponent* component);
+		int addBehaviorComponent(std::shared_ptr<BehaviorComponent> component);
 		int spriteId = -1;
 		int id = -1;
 		SDL_Rect pos;
-		void notify(Action* action);
+		void notify(std::shared_ptr<Action> action);
 	private:
-		std::vector<BehaviorComponent*> behaviorComponents;	
+		std::vector<std::shared_ptr<BehaviorComponent>> behaviorComponents;	
 };
 
 #endif

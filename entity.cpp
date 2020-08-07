@@ -2,13 +2,6 @@
 #include "behavior_component.hpp"
 #include "entity.hpp"
 
-Entity::~Entity()
-{
-	for (auto component : behaviorComponents){
-		delete(component);
-	}
-}
-
 void Entity::live()
 {
 	for (auto component : behaviorComponents){
@@ -16,17 +9,17 @@ void Entity::live()
 	}
 }
 
-int Entity::addBehaviorComponent(BehaviorComponent* component)
+int Entity::addBehaviorComponent(std::shared_ptr<BehaviorComponent> component)
 {
 	behaviorComponents.push_back(component);
 	return behaviorComponents.size() - 1;
 }
 
-void Entity::notify(Action* action)
+void Entity::notify(std::shared_ptr<Action> action)
 {
 	switch (action->type){
 		case MOVE_ENTITY:{
-			auto moveEntityAction = (MoveEntityAction*)action;
+			auto moveEntityAction = std::static_pointer_cast<MoveEntityAction>(action);
 			pos.x += moveEntityAction->x;
 			pos.y += moveEntityAction->y;
 			break;

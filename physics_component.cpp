@@ -15,16 +15,16 @@ void PhysicsComponent::behave()
 				x = 0;
 			}
 		}
-		MoveEntityAction* action = new MoveEntityAction(x, y);
+		auto action = std::make_shared<MoveEntityAction>(x, y);
 		observer->notify(action);
 	}
 }
 
-void PhysicsComponent::notify(Action* action)
+void PhysicsComponent::notify(std::shared_ptr<Action> action)
 {
 	switch(action->type){
 		case SPEED_INCREASE: {
-			auto speedIncreaseAction = (SpeedIncreaseAction*)action;
+			std::shared_ptr<SpeedIncreaseAction> speedIncreaseAction = std::static_pointer_cast<SpeedIncreaseAction>(action);
 			float amount = speedIncreaseAction->speed;
 			switch (speedIncreaseAction->dir){
 				case 0:
@@ -47,7 +47,7 @@ void PhysicsComponent::notify(Action* action)
 			break;
 		}
 		case COLLISION :{
-			auto collisionAction = (CollisionAction*)action;
+			std::shared_ptr<CollisionAction> collisionAction = std::static_pointer_cast<CollisionAction>(action);
 			switch (collisionAction->collisionActionType){
 				case SOLID:{
 					hasSolidCollision = true;
