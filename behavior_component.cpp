@@ -13,3 +13,10 @@ void BehaviorComponent::notify(Action* action)
 {
 	std::cerr << "base BehaviorComponent got notified: " << action->type << std::endl;
 }
+
+void BehaviorComponent::notifyAll(Action* action)
+{
+	for (auto o : observers){
+		o->notify(action);
+	}
+}

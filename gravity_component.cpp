@@ -10,7 +10,5 @@ void GravityComponent::behave()
 {
 	float speedIncrease = force / mass;
 	auto a = new SpeedIncreaseAction(speedIncrease, dir);
-	for(auto o : observers ){
-		o->notify(a);
-	}
+	notifyAll(a);
 }

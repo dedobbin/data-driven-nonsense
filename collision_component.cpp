@@ -63,12 +63,10 @@ void CollisionComponent::behave()
 			continue;
 		}
 		if (collision(owner->pos, collider->pos)){
-			for (auto o : observers){
-				collisionActionType_t collisionType = (*collisionMap)[collider->id];
-				if (collisionType != NONE){
-					CollisionAction* action = new CollisionAction(collisionType);
-					o->notify(action);
-				}
+			collisionActionType_t collisionType = (*collisionMap)[collider->id];
+			if (collisionType != NONE){
+				CollisionAction* action = new CollisionAction(collisionType);
+				notifyAll(action);
 			}
 		}
 	}

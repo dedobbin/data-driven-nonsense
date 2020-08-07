@@ -14,6 +14,8 @@ class BehaviorComponent : public Observer
 		virtual void notify(Action* action);
 	protected:
 		std::vector<Observer*> observers;
+		void notifyAll(Action* action);
+
 };
 
 #endif
