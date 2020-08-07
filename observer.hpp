@@ -7,7 +7,6 @@
 class Observer 
 {
 	public:
-		int id;
 		virtual void notify(std::shared_ptr<Action> a) = 0;
 };
 

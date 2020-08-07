@@ -4,10 +4,9 @@
 
 int BehaviorComponent::addObserver(std::shared_ptr<Observer> observer)
 {
-	int id = observers.size();
-	observer->id = id;
+	int index = observers.size();
 	observers.push_back(observer);
-	return id;
+	return index;
 }
 
 void BehaviorComponent::notify(std::shared_ptr<Action> action)
