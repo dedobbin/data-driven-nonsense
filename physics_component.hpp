@@ -15,6 +15,7 @@ class PhysicsComponent : public BehaviorComponent
 		float xSpeed;
 		float ySpeed;
 		int lastMoveDir = 0; 
+		bool hasSolidCollision = false;
 };
 
 #endif

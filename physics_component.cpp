@@ -5,7 +5,17 @@
 void PhysicsComponent::behave()
 {
 	for (auto observer : observers){
-		MoveEntityAction* action = new MoveEntityAction(xSpeed, ySpeed);
+		int x = xSpeed;
+		int y = ySpeed;
+		if (hasSolidCollision){
+			hasSolidCollision = false;
+			if (lastMoveDir == LAST_MOVE_DIR_Y){
+				y = 0;
+			} else if (lastMoveDir == LAST_MOVE_DIR_Y){
+				x = 0;
+			}
+		}
+		MoveEntityAction* action = new MoveEntityAction(x, y);
 		observer->notify(action);
 	}
 }
@@ -40,7 +50,7 @@ void PhysicsComponent::notify(Action* action)
 			auto collisionAction = (CollisionAction*)action;
 			switch (collisionAction->collisionActionType){
 				case SOLID:{
-					std::cout << "solid collision " << std::endl;
+					hasSolidCollision = true;
 					break;
 				}
 				default:{
