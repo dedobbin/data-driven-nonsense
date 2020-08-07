@@ -60,7 +60,11 @@ void CollisionComponent::behave()
 			continue;
 		}
 		if (collision(owner->pos, collider->pos)){
-			std::cout << "TODO: broadcast collision action " << std::endl;
+			for (auto o : observers){
+				//TODO: make type, (take from colliding entity?) dynamic
+				auto action = new CollisionAction(SOLID);
+				o->notify(action);
+			}
 		}
 	}
 }

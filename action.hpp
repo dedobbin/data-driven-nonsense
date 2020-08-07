@@ -5,7 +5,12 @@ enum actionType_t
 {
 	SPEED_INCREASE,
 	MOVE_ENTITY,
+	COLLISION,
+};
 
+enum collisionActionType_t
+{
+	SOLID,
 };
 
 class Action 
@@ -29,6 +34,13 @@ class MoveEntityAction : public Action
 		MoveEntityAction(float x, float y);
 		const float x;
 		const float y;
+};
+
+class CollisionAction : public Action
+{
+	public:
+		CollisionAction(collisionActionType_t collisionType);
+		const collisionActionType_t collisionActionType;
 };
 
 #endif

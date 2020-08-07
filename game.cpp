@@ -42,6 +42,7 @@ void Game::setupAssets()
 
 	auto collision = new CollisionComponent(player, &entities);
 	player->addBehaviorComponent(collision);
+	collision->addObserver(physics);
 
 	/** some solid **/
 	Entity* solid = new Entity();

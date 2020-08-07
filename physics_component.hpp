@@ -3,6 +3,9 @@
 
 #include "behavior_component.hpp"
 
+#define LAST_MOVE_DIR_X 1
+#define LAST_MOVE_DIR_Y 2
+
 class PhysicsComponent : public BehaviorComponent
 {
 	public:
@@ -11,6 +14,7 @@ class PhysicsComponent : public BehaviorComponent
 	private:
 		float xSpeed;
 		float ySpeed;
+		int lastMoveDir = 0; 
 };
 
 #endif

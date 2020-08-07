@@ -12,3 +12,6 @@ MoveEntityAction::MoveEntityAction(float x, float y)
 : Action (MOVE_ENTITY), x(x), y(y)
 {}
 
+CollisionAction::CollisionAction(collisionActionType_t collisionType)
+: Action (COLLISION), collisionActionType(collisionType)
+{}
