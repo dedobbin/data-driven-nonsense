@@ -10,6 +10,7 @@ enum actionType_t
 
 enum collisionActionType_t
 {
+	NONE, //0 should be NONE, so if collisionMap[i] returns NULL, it's seen as NONE
 	SOLID,
 };
 

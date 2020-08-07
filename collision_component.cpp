@@ -49,8 +49,11 @@ bool collision(SDL_Rect A, SDL_Rect B)
     return true;
 }
 
-CollisionComponent::CollisionComponent(Entity* owner, std::vector<Entity*>* colliders)
-: owner(owner), colliders(colliders)
+CollisionComponent::CollisionComponent(
+	Entity* owner, std::vector<Entity*>* colliders, 
+	std::unordered_map<int, collisionActionType_t>* collisionMap
+)
+: owner(owner), colliders(colliders), collisionMap(collisionMap)
 {}
 
 void CollisionComponent::behave()
@@ -61,9 +64,11 @@ void CollisionComponent::behave()
 		}
 		if (collision(owner->pos, collider->pos)){
 			for (auto o : observers){
-				//TODO: make type, (take from colliding entity?) dynamic
-				auto action = new CollisionAction(SOLID);
-				o->notify(action);
+				collisionActionType_t collisionType = (*collisionMap)[collider->id];
+				if (collisionType != NONE){
+					CollisionAction* action = new CollisionAction(collisionType);
+					o->notify(action);
+				}
 			}
 		}
 	}

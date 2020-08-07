@@ -2,6 +2,7 @@
 #define __GAME_HPP__
 
 #include <vector>
+#include <unordered_map>
 #include "visuals.hpp" 
 #include "action.hpp"
 #include "entity.hpp"
@@ -21,6 +22,7 @@ class Game
 		);
 	private:
 		std::vector<Entity*> entities;
+		std::unordered_map<int, collisionActionType_t> collisionMap; //entity id and collisionType
 		bool initSDL();
 		Visuals* visuals;
 

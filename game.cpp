@@ -40,13 +40,14 @@ void Game::setupAssets()
 	player->addBehaviorComponent(physics);
 	physics->addObserver(player);
 
-	auto collision = new CollisionComponent(player, &entities);
+	auto collision = new CollisionComponent(player, &entities, &collisionMap);
 	player->addBehaviorComponent(collision);
 	collision->addObserver(physics);
 
 	/** some solid **/
 	Entity* solid = new Entity();
 	entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
+	collisionMap[entityId] = SOLID;
 }
 
 void Game::go()
