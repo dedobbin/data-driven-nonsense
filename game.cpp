@@ -35,6 +35,12 @@ void Game::setupAssets()
 	player->addBehaviorComponent(collision);
 	collision->addObserver(physics);
 
+
+	auto dummy = std::make_shared<DummyComponent>();
+	player->addBehaviorComponent(dummy);
+	collision->addObserver(dummy);
+	dummy->addObserver(player);
+
 	/** some solid **/
 	auto solid = std::make_shared<Entity>();
 	entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");

@@ -10,4 +10,12 @@ class BehaviorComponent : public Observer
 		virtual void behave() = 0;
 };
 
+
+class DummyComponent : public BehaviorComponent
+{
+	public:
+		void notify(std::shared_ptr<Action> action);
+		void behave();
+};
+
 #endif

@@ -6,6 +6,7 @@ enum actionType_t
 	SPEED_INCREASE,
 	MOVE_ENTITY,
 	COLLISION,
+	DUMMY,
 };
 
 enum collisionActionType_t

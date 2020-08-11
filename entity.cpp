@@ -24,5 +24,9 @@ void Entity::notify(std::shared_ptr<Action> action)
 			pos.y += moveEntityAction->y;
 			break;
 		}
+		case DUMMY:{
+			std::cout << "player got dummy action" << std::endl;
+			exit(1);
+		}
 	}
 }
