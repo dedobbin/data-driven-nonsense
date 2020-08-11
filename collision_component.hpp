@@ -1,8 +1,13 @@
 #ifndef __COLLISION_COMPONENT__
 #define __COLLISION_COMPONENT__
 
+#include <memory>
+#include <vector>
 #include <unordered_map>
+#include "action.hpp"
 #include "behavior_component.hpp"
+
+
 
 class Entity;
 
