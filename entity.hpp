@@ -13,6 +13,7 @@ class Entity : public Observer
 	public:
 		void live();
 		int addBehaviorComponent(std::shared_ptr<BehaviorComponent> component);
+		void removeBehaviorcomponent(int index);
 		int spriteId = -1;
 		int id = -1;
 		SDL_Rect pos;

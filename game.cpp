@@ -33,13 +33,9 @@ void Game::setupAssets()
 
 	auto collision = std::make_shared<CollisionComponent>(player, &entities, &collisionMap);
 	player->addBehaviorComponent(collision);
-	collision->addObserver(physics);
+	int debugIndex = collision->addObserver(physics);
 
-
-	auto dummy = std::make_shared<DummyComponent>();
-	player->addBehaviorComponent(dummy);
-	collision->addObserver(dummy);
-	dummy->addObserver(player);
+	collision->removeObserver(debugIndex);
 
 	/** some solid **/
 	auto solid = std::make_shared<Entity>();

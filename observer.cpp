@@ -9,6 +9,11 @@ int Observer::addObserver(std::shared_ptr<Observer> observer)
 	return index;
 }
 
+void Observer::removeObserver(int index)
+{
+	observers.erase(observers.begin() + index);
+}
+
 void Observer::notify(std::shared_ptr<Action> action)
 {
 	std::cerr << "base BehaviorComponent got notified: " << action->type << std::endl;

@@ -15,6 +15,11 @@ int Entity::addBehaviorComponent(std::shared_ptr<BehaviorComponent> component)
 	return behaviorComponents.size() - 1;
 }
 
+void Entity::removeBehaviorcomponent(int index)
+{
+	behaviorComponents.erase(behaviorComponents.begin() + index);
+}
+
 void Entity::notify(std::shared_ptr<Action> action)
 {
 	switch (action->type){
@@ -30,3 +35,4 @@ void Entity::notify(std::shared_ptr<Action> action)
 		}
 	}
 }
+
