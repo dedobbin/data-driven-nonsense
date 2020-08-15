@@ -24,16 +24,19 @@ void Game::setupAssets()
 	float playerMass = 1.0;
 
 	auto gravity = std::make_shared<GravityComponent>(playerMass);
-	//player->addBehaviorComponent(gravity);
+	componentPool.push_back(gravity);
+	player->addBehaviorComponent(gravity);
 
 	auto physics = std::make_shared<PhysicsComponent>();
-	// gravity->addObserver(physics);
-	// player->addBehaviorComponent(physics);
-	// physics->addObserver(player);
+	componentPool.push_back(physics);
+	gravity->addObserver(physics);
+	player->addBehaviorComponent(physics);
+	physics->addObserver(player);
 
 	auto collision = std::make_shared<CollisionComponent>(player, &entities, &collisionMap);
-	// player->addBehaviorComponent(collision);
-	// int debugIndex = collision->addObserver(physics);
+	componentPool.push_back(collision);
+	player->addBehaviorComponent(collision);
+	int debugIndex = collision->addObserver(physics);
 
 	// collision->removeObserver(debugIndex);
 
@@ -48,7 +51,7 @@ void Game::go()
 	int countedFrames = 0;
 	const int FPS = 60;
 	const int SCREEN_TICK_PER_FRAME = 1000 / FPS;
-	bool keepGoing = false;
+	bool keepGoing = true;
 
 	fpsTimer.start();
 	

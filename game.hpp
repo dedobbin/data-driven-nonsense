@@ -26,6 +26,7 @@ class Game
 		bool initSDL();
 		std::unique_ptr<Visuals, std::default_delete<Visuals>> visuals;
 
+		std::vector<std::shared_ptr<BehaviorComponent>> componentPool; //keep alive
 		LazyFooTimer capTimer;
 		LazyFooTimer fpsTimer;
 };

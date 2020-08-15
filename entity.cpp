@@ -9,7 +9,8 @@ Entity::~Entity()
 
 void Entity::live()
 {
-	for (auto component : behaviorComponents){
+	for (auto w : behaviorComponents){
+		auto component = w.lock();
 		component->behave();
 	}
 }

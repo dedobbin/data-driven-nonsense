@@ -20,7 +20,7 @@ class Entity : public Observer
 		SDL_Rect pos;
 		void notify(std::shared_ptr<Action> action);
 	private:
-		std::vector<std::shared_ptr<BehaviorComponent>> behaviorComponents;	
+		std::vector<std::weak_ptr<BehaviorComponent>> behaviorComponents;	
 };
 
 #endif
