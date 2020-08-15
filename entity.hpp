@@ -11,6 +11,7 @@
 class Entity : public Observer
 {
 	public:
+		~Entity();
 		void live();
 		int addBehaviorComponent(std::shared_ptr<BehaviorComponent> component);
 		void removeBehaviorcomponent(int index);

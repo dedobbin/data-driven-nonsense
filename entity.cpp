@@ -2,6 +2,11 @@
 #include "behavior_component.hpp"
 #include "entity.hpp"
 
+Entity::~Entity()
+{
+	std::cout << "DEBUG: Entity deconstructor called" << std::endl; 
+}
+
 void Entity::live()
 {
 	for (auto component : behaviorComponents){

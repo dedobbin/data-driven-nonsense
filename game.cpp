@@ -24,18 +24,18 @@ void Game::setupAssets()
 	float playerMass = 1.0;
 
 	auto gravity = std::make_shared<GravityComponent>(playerMass);
-	player->addBehaviorComponent(gravity);
+	//player->addBehaviorComponent(gravity);
 
 	auto physics = std::make_shared<PhysicsComponent>();
-	gravity->addObserver(physics);
-	player->addBehaviorComponent(physics);
-	physics->addObserver(player);
+	// gravity->addObserver(physics);
+	// player->addBehaviorComponent(physics);
+	// physics->addObserver(player);
 
 	auto collision = std::make_shared<CollisionComponent>(player, &entities, &collisionMap);
-	player->addBehaviorComponent(collision);
-	int debugIndex = collision->addObserver(physics);
+	// player->addBehaviorComponent(collision);
+	// int debugIndex = collision->addObserver(physics);
 
-	collision->removeObserver(debugIndex);
+	// collision->removeObserver(debugIndex);
 
 	/** some solid **/
 	auto solid = std::make_shared<Entity>();
@@ -48,7 +48,7 @@ void Game::go()
 	int countedFrames = 0;
 	const int FPS = 60;
 	const int SCREEN_TICK_PER_FRAME = 1000 / FPS;
-	bool keepGoing = true;
+	bool keepGoing = false;
 
 	fpsTimer.start();
 	
@@ -80,6 +80,7 @@ void Game::go()
 			SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
 		}
 	}
+	std::cout << "DEBUG: game end" << std::endl;
 }
 
 int Game::addEntity(std::shared_ptr<Entity> entity, 
