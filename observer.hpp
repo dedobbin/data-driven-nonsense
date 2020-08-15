@@ -12,10 +12,10 @@ class Observer
 	public:
 		int addObserver(std::shared_ptr<Observer> observer);
 		void removeObserver(int id);
-		virtual void notify(std::shared_ptr<Action> action) = 0;
+		virtual void notify(std::weak_ptr<Action> action) = 0;
 	protected:
 		std::vector<std::shared_ptr<Observer>> observers;
-		void notifyAll(std::shared_ptr<Action> action);
+		void notifyAll(std::weak_ptr<Action> action);
 };
 
 #endif

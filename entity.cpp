@@ -1,10 +1,11 @@
 #include <iostream>
+#include "helpers.hpp"
 #include "behavior_component.hpp"
 #include "entity.hpp"
 
 Entity::~Entity()
 {
-	std::cout << "DEBUG: Entity deconstructor called" << std::endl; 
+	//std::cout << "DEBUG: Entity deconstructor called" << std::endl; 
 }
 
 void Entity::live()
@@ -26,13 +27,13 @@ void Entity::removeBehaviorcomponent(int index)
 	behaviorComponents.erase(behaviorComponents.begin() + index);
 }
 
-void Entity::notify(std::shared_ptr<Action> action)
+void Entity::notify(std::weak_ptr<Action> action)
 {
-	switch (action->type){
+	switch (action.lock()->type){
 		case MOVE_ENTITY:{
-			auto moveEntityAction = std::static_pointer_cast<MoveEntityAction>(action);
-			pos.x += moveEntityAction->x;
-			pos.y += moveEntityAction->y;
+			auto moveEntityAction = static_pointer_cast<MoveEntityAction>(action);
+			pos.x += moveEntityAction.lock()->x;
+			pos.y += moveEntityAction.lock()->y;
 			break;
 		}
 		case DUMMY:{

@@ -1,8 +1,14 @@
+#include <iostream>
 #include "action.hpp"
 
 Action::Action(actionType_t type)
 : type(type)
 {}
+
+Action::~Action()
+{
+	//std::cout << "DEBUG: Action deconstructor called" << std::endl; 
+}
 
 SpeedIncreaseAction::SpeedIncreaseAction(float speed, int dir)
 : Action (SPEED_INCREASE), speed(speed), dir(dir)

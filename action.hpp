@@ -19,6 +19,7 @@ class Action
 {
 	public:
 		Action(actionType_t type);
+		~Action();
 		const actionType_t type;
 };
 

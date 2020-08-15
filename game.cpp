@@ -3,6 +3,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL.h> 
 #include <SDL2/SDL_ttf.h>
+#include <functional>
 #include "gravity_component.hpp"
 #include "collision_component.hpp"
 #include "physics_component.hpp"

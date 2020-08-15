@@ -18,7 +18,7 @@ class Entity : public Observer
 		int spriteId = -1;
 		int id = -1;
 		SDL_Rect pos;
-		void notify(std::shared_ptr<Action> action);
+		void notify(std::weak_ptr<Action> action);
 	private:
 		std::vector<std::weak_ptr<BehaviorComponent>> behaviorComponents;	
 };

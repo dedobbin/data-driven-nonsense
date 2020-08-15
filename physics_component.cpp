@@ -1,32 +1,31 @@
 #include <iostream>
+#include "helpers.hpp"
 #include "physics_component.hpp"
 
 
 void PhysicsComponent::behave()
 {
-	for (auto observer : observers){
-		int x = xSpeed;
-		int y = ySpeed;
-		if (hasSolidCollision){
-			hasSolidCollision = false;
-			if (lastMoveDir == LAST_MOVE_DIR_Y){
-				y = 0;
-			} else if (lastMoveDir == LAST_MOVE_DIR_Y){
-				x = 0;
-			}
+	int x = xSpeed;
+	int y = ySpeed;
+	if (hasSolidCollision){
+		hasSolidCollision = false;
+		if (lastMoveDir == LAST_MOVE_DIR_Y){
+			y = 0;
+		} else if (lastMoveDir == LAST_MOVE_DIR_Y){
+			x = 0;
 		}
-		auto action = std::make_shared<MoveEntityAction>(x, y);
-		observer->notify(action);
 	}
+	auto action = std::make_shared<MoveEntityAction>(x, y);
+	notifyAll(action);
 }
 
-void PhysicsComponent::notify(std::shared_ptr<Action> action)
+void PhysicsComponent::notify(std::weak_ptr<Action> action)
 {
-	switch(action->type){
+	switch(action.lock()->type){
 		case SPEED_INCREASE: {
-			std::shared_ptr<SpeedIncreaseAction> speedIncreaseAction = std::static_pointer_cast<SpeedIncreaseAction>(action);
-			float amount = speedIncreaseAction->speed;
-			switch (speedIncreaseAction->dir){
+			auto speedIncreaseAction = static_pointer_cast<SpeedIncreaseAction>(action);
+			float amount = speedIncreaseAction.lock()->speed;
+			switch (speedIncreaseAction.lock()->dir){
 				case 0:
 					ySpeed -= amount;
 					lastMoveDir = LAST_MOVE_DIR_Y;
@@ -47,8 +46,8 @@ void PhysicsComponent::notify(std::shared_ptr<Action> action)
 			break;
 		}
 		case COLLISION :{
-			std::shared_ptr<CollisionAction> collisionAction = std::static_pointer_cast<CollisionAction>(action);
-			switch (collisionAction->collisionActionType){
+			auto collisionAction = static_pointer_cast<CollisionAction>(action);
+			switch (collisionAction.lock()->collisionActionType){
 				case SOLID:{
 					hasSolidCollision = true;
 					break;
