@@ -9,5 +9,5 @@ BehaviorComponent::~BehaviorComponent()
 
 void BehaviorComponent::notify(std::weak_ptr<Action>)
 {	
-	std::cerr << "Called class componenent notify" << std::endl;
+	std::cerr << "Called class component notify" << std::endl;
 }
