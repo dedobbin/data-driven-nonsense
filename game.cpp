@@ -48,6 +48,14 @@ void Game::setupAssets()
 	auto solid = std::make_shared<Entity>();
 	entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
 	collisionMap[entityId] = SOLID;
+
+	solid = std::make_shared<Entity>();
+	entityId = addEntity(solid, 0, 0, 32, 32, 200, 400, 100, 100, "spritesheet1.png");
+	collisionMap[entityId] = SOLID;
+
+	solid = std::make_shared<Entity>();
+	entityId = addEntity(solid, 0, 0, 32, 32, 300, 400, 100, 100, "spritesheet1.png");
+	collisionMap[entityId] = SOLID;
 }
 
 void Game::go()
