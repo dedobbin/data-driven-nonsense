@@ -20,7 +20,7 @@ class Game : public Observer
 			int posX, int posY, int posW, int posH,
 			std::string spritesheetStr
 		);
-		void notify(std::weak_ptr<Action> action);
+		void notify(std::shared_ptr<Action> action);
 	private:
 		std::vector<std::shared_ptr<Entity>> entities;
 		std::unordered_map<int, collisionActionType_t> collisionMap; //entity id and collisionType

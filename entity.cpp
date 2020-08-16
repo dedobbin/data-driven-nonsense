@@ -27,13 +27,13 @@ void Entity::removeBehaviorcomponent(int index)
 	behaviorComponents.erase(behaviorComponents.begin() + index);
 }
 
-void Entity::notify(std::weak_ptr<Action> action)
+void Entity::notify(std::shared_ptr<Action> action)
 {
-	switch (action.lock()->type){
+	switch (action->type){
 		case MOVE_ENTITY:{
 			auto moveEntityAction = static_pointer_cast<MoveEntityAction>(action);
-			pos.x += moveEntityAction.lock()->x;
-			pos.y += moveEntityAction.lock()->y;
+			pos.x += moveEntityAction->x;
+			pos.y += moveEntityAction->y;
 			break;
 		}
 	}

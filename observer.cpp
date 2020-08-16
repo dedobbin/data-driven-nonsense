@@ -14,15 +14,14 @@ void Observer::removeObserver(int index)
 	observers.erase(observers.begin() + index);
 }
 
-void Observer::notify(std::weak_ptr<Action> action)
+void Observer::notify(std::shared_ptr<Action> action)
 {
-	std::cerr << "base BehaviorComponent got notified: " << action.lock()->type << std::endl;
+	std::cerr << "base BehaviorComponent got notified: " << action->type << std::endl;
 }
 
-void Observer::notifyAll(std::weak_ptr<Action> action)
+void Observer::notifyAll(std::shared_ptr<Action> action)
 {
 	for (auto o : observers){
-		
-		o->notify(action);
+			o->notify(action);
 	}
 }

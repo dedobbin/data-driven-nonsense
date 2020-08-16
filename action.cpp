@@ -3,7 +3,9 @@
 
 Action::Action(actionType_t type)
 : type(type)
-{}
+{
+	//std::cout << "DEBUG: Action of type " << type << " created" << std::endl;
+}
 
 Action::~Action()
 {

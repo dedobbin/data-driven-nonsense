@@ -19,13 +19,13 @@ void PhysicsComponent::behave()
 	notifyAll(action);
 }
 
-void PhysicsComponent::notify(std::weak_ptr<Action> action)
+void PhysicsComponent::notify(std::shared_ptr<Action> action)
 {
-	switch(action.lock()->type){
+	switch(action->type){
 		case SPEED_INCREASE: {
-			auto speedIncreaseAction = static_pointer_cast<SpeedIncreaseAction>(action);
-			float amount = speedIncreaseAction.lock()->speed;
-			switch (speedIncreaseAction.lock()->dir){
+			auto speedIncreaseAction = std::static_pointer_cast<SpeedIncreaseAction>(action);
+			float amount = speedIncreaseAction->speed;
+			switch (speedIncreaseAction->dir){
 				case 0:
 					ySpeed -= amount;
 					lastMoveDir = LAST_MOVE_DIR_Y;
@@ -46,8 +46,8 @@ void PhysicsComponent::notify(std::weak_ptr<Action> action)
 			break;
 		}
 		case COLLISION :{
-			auto collisionAction = static_pointer_cast<CollisionAction>(action);
-			switch (collisionAction.lock()->collisionActionType){
+			auto collisionAction = std::static_pointer_cast<CollisionAction>(action);
+			switch (collisionAction->collisionActionType){
 				case SOLID:{
 					hasSolidCollision = true;
 					break;

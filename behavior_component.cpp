@@ -7,7 +7,7 @@ BehaviorComponent::~BehaviorComponent()
 	//std::cout << "DEBUG: BehaviorComponent deconstructor called" << std::endl; 
 }
 
-void BehaviorComponent::notify(std::weak_ptr<Action>)
+void BehaviorComponent::notify(std::shared_ptr<Action>)
 {	
 	std::cerr << "Called class component notify" << std::endl;
 }

@@ -41,6 +41,9 @@ void Game::setupAssets()
 	player->addBehaviorComponent(collision);
 	int debugIndex = collision->addObserver(physics);
 
+	//needs to listen to controls
+	this->addObserver(player);
+
 	// collision->removeObserver(debugIndex);
 
 	/** some solid **/
@@ -57,17 +60,22 @@ void Game::go()
 	
 	keepGoing = true;
 
-	std::unique_ptr<Input> input;
-	
-	std::shared_ptr<Game> game(this);
-	input->addObserver(game);
+	auto input = std::make_unique<Input>();
 
 	fpsTimer.start();
 	
 	while(keepGoing){
 		capTimer.start();
 
-		input->process();
+		auto inputActions = input->process();
+		for (auto a : inputActions){
+			if (a->type == QUIT){
+				keepGoing = false;
+			} else {
+				notifyAll(a);
+			}
+		}
+
 
 		for (auto e : entities){
 			e->live();
@@ -110,10 +118,9 @@ int Game::addEntity(std::shared_ptr<Entity> entity,
 	return id;
 }
 
-void Game::notify(std::weak_ptr<Action> action)
+void Game::notify(std::shared_ptr<Action> action)
 {	
-	auto lock = action.lock();
-	switch(lock->type){
+	switch(action->type){
 		case QUIT:{
 			keepGoing = false;
 		}

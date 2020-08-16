@@ -7,7 +7,7 @@ class BehaviorComponent : public Observer
 {
 	public:
 		~BehaviorComponent();
-		void notify(std::weak_ptr<Action> action);
+		void notify(std::shared_ptr<Action> action);
 		virtual void behave() = 0;
 };
 

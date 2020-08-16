@@ -1,12 +1,12 @@
 #ifndef __CONTROLLER_HPP__
 #define __CONTROLLER_HPP__
 
-#include "observer.hpp"
+#include <vector>
 
-class Input : public Observer
+class Input
 {
 	public:
-		void process();	
+	std::vector<std::shared_ptr<Action>> process();
 };
 
 #endif
