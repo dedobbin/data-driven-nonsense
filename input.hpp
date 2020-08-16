@@ -2,11 +2,13 @@
 #define __CONTROLLER_HPP__
 
 #include <vector>
+#include "observer.hpp"
 
-class Input
+class Input : public Observer 
 {
 	public:
-	std::vector<std::shared_ptr<Action>> process();
+		bool process();
+		void notify(std::shared_ptr<Action> action);
 };
 
 #endif

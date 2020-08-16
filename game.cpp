@@ -9,13 +9,11 @@
 #include "collision_component.hpp"
 #include "physics_component.hpp"
 #include "visuals.hpp"
-#include "input.hpp"
 #include "game.hpp"
 
 Game::Game()
 {
 	visuals = std::make_unique<Visuals>();
-	setupAssets();
 }
 void Game::setupAssets()
 {
@@ -42,7 +40,7 @@ void Game::setupAssets()
 	int debugIndex = collision->addObserver(physics);
 
 	//needs to listen to controls
-	this->addObserver(player);
+	input->addObserver(player);
 
 	// collision->removeObserver(debugIndex);
 
@@ -58,23 +56,19 @@ void Game::go()
 	const int FPS = 60;
 	const int SCREEN_TICK_PER_FRAME = 1000 / FPS;
 	
+	input = std::make_unique<Input>();
+	setupAssets();
+
 	keepGoing = true;
 
-	auto input = std::make_unique<Input>();
 
 	fpsTimer.start();
+	
 	
 	while(keepGoing){
 		capTimer.start();
 
-		auto inputActions = input->process();
-		for (auto a : inputActions){
-			if (a->type == QUIT){
-				keepGoing = false;
-			} else {
-				notifyAll(a);
-			}
-		}
+		keepGoing = input->process();
 
 
 		for (auto e : entities){
@@ -116,14 +110,4 @@ int Game::addEntity(std::shared_ptr<Entity> entity,
 	int id = entities.size() - 1;
 	entity->id = id;
 	return id;
-}
-
-void Game::notify(std::shared_ptr<Action> action)
-{	
-	switch(action->type){
-		case QUIT:{
-			keepGoing = false;
-		}
-
-	}
 }

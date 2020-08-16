@@ -7,9 +7,10 @@
 #include "visuals.hpp" 
 #include "action.hpp"
 #include "entity.hpp"
+#include "input.hpp"
 #include "sdl_utils.hpp"
 
-class Game : public Observer
+class Game
 {
 	public:
 		Game();
@@ -20,13 +21,13 @@ class Game : public Observer
 			int posX, int posY, int posW, int posH,
 			std::string spritesheetStr
 		);
-		void notify(std::shared_ptr<Action> action);
 	private:
 		std::vector<std::shared_ptr<Entity>> entities;
 		std::unordered_map<int, collisionActionType_t> collisionMap; //entity id and collisionType
-		bool initSDL();
+		std::unique_ptr<Input> input;
 		std::unique_ptr<Visuals, std::default_delete<Visuals>> visuals;
 
+		bool initSDL();
 		std::vector<std::shared_ptr<BehaviorComponent>> componentPool; //keep alive
 		LazyFooTimer capTimer;
 		LazyFooTimer fpsTimer;
