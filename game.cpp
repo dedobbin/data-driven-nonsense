@@ -4,10 +4,12 @@
 #include <SDL2/SDL.h> 
 #include <SDL2/SDL_ttf.h>
 #include <functional>
+#include <memory>
 #include "gravity_component.hpp"
 #include "collision_component.hpp"
 #include "physics_component.hpp"
 #include "visuals.hpp"
+#include "input.hpp"
 #include "game.hpp"
 
 Game::Game()
@@ -52,19 +54,20 @@ void Game::go()
 	int countedFrames = 0;
 	const int FPS = 60;
 	const int SCREEN_TICK_PER_FRAME = 1000 / FPS;
-	bool keepGoing = true;
+	
+	keepGoing = true;
+
+	std::unique_ptr<Input> input;
+	
+	std::shared_ptr<Game> game(this);
+	input->addObserver(game);
 
 	fpsTimer.start();
 	
 	while(keepGoing){
 		capTimer.start();
 
-		SDL_Event e;
-		while( SDL_PollEvent( &e ) != 0 ){
-			if (e.type == SDL_QUIT){
-				keepGoing = false;
-			}
-		}
+		input->process();
 
 		for (auto e : entities){
 			e->live();
@@ -105,4 +108,15 @@ int Game::addEntity(std::shared_ptr<Entity> entity,
 	int id = entities.size() - 1;
 	entity->id = id;
 	return id;
+}
+
+void Game::notify(std::weak_ptr<Action> action)
+{	
+	auto lock = action.lock();
+	switch(lock->type){
+		case QUIT:{
+			keepGoing = false;
+		}
+
+	}
 }

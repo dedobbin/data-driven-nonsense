@@ -36,10 +36,6 @@ void Entity::notify(std::weak_ptr<Action> action)
 			pos.y += moveEntityAction.lock()->y;
 			break;
 		}
-		case DUMMY:{
-			std::cout << "player got dummy action" << std::endl;
-			exit(1);
-		}
 	}
 }
 

@@ -9,7 +9,7 @@
 #include "entity.hpp"
 #include "sdl_utils.hpp"
 
-class Game
+class Game : public Observer
 {
 	public:
 		Game();
@@ -20,6 +20,7 @@ class Game
 			int posX, int posY, int posW, int posH,
 			std::string spritesheetStr
 		);
+		void notify(std::weak_ptr<Action> action);
 	private:
 		std::vector<std::shared_ptr<Entity>> entities;
 		std::unordered_map<int, collisionActionType_t> collisionMap; //entity id and collisionType
@@ -29,6 +30,7 @@ class Game
 		std::vector<std::shared_ptr<BehaviorComponent>> componentPool; //keep alive
 		LazyFooTimer capTimer;
 		LazyFooTimer fpsTimer;
+		bool keepGoing = true;
 };
 
 #endif
