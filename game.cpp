@@ -18,44 +18,66 @@ Game::Game()
 void Game::setupAssets()
 {
 	//TODO: read from file
-
 	/** player **/
 	std::shared_ptr<Entity> player = std::make_shared<Entity>();
 	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
-	float playerMass = 1.0;
+	player->addBehaviorComponent(std::make_shared<GravityComponent>(1.0));
+	player->addBehaviorComponent(std::make_shared<PhysicsComponent>());
+	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player->id, &player->pos, &entities, &collisionMap));
 
-	auto gravity = std::make_shared<GravityComponent>(playerMass);
-	componentPool.push_back(gravity);
-	player->addBehaviorComponent(gravity);
 
-	auto physics = std::make_shared<PhysicsComponent>();
-	componentPool.push_back(physics);
-	gravity->addObserver(physics);
-	player->addBehaviorComponent(physics);
-	physics->addObserver(player);
+	/** some solids **/
+	// auto solid = std::make_shared<Entity>();
+	// entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
+	// collisionMap[entityId] = SOLID;
 
-	auto collision = std::make_shared<CollisionComponent>(player, &entities, &collisionMap);
-	componentPool.push_back(collision);
-	player->addBehaviorComponent(collision);
-	int debugIndex = collision->addObserver(physics);
+	// solid = std::make_shared<Entity>();
+	// entityId = addEntity(solid, 0, 0, 32, 32, 200, 400, 100, 100, "spritesheet1.png");
+	// collisionMap[entityId] = SOLID;
 
-	//needs to listen to controls
-	input->addObserver(physics);
+	// solid = std::make_shared<Entity>();
+	// entityId = addEntity(solid, 0, 0, 32, 32, 300, 400, 100, 100, "spritesheet1.png");
+	// collisionMap[entityId] = SOLID;
 
-	// collision->removeObserver(debugIndex);
 
-	/** some solid **/
-	auto solid = std::make_shared<Entity>();
-	entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
-	collisionMap[entityId] = SOLID;
 
-	solid = std::make_shared<Entity>();
-	entityId = addEntity(solid, 0, 0, 32, 32, 200, 400, 100, 100, "spritesheet1.png");
-	collisionMap[entityId] = SOLID;
+	/** player **/
+	// std::shared_ptr<Entity> player = std::make_shared<Entity>();
+	// int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
+	// float playerMass = 1.0;
 
-	solid = std::make_shared<Entity>();
-	entityId = addEntity(solid, 0, 0, 32, 32, 300, 400, 100, 100, "spritesheet1.png");
-	collisionMap[entityId] = SOLID;
+	// auto gravity = std::make_shared<GravityComponent>(playerMass);
+	// componentPool.push_back(gravity);
+	// player->addBehaviorComponent(gravity);
+
+	// auto physics = std::make_shared<PhysicsComponent>();
+	// componentPool.push_back(physics);
+	// gravity->addObserver(physics);
+	// player->addBehaviorComponent(physics);
+	// physics->addObserver(player);
+
+	// auto collision = std::make_shared<CollisionComponent>(player, &entities, &collisionMap);
+	// componentPool.push_back(collision);
+	// player->addBehaviorComponent(collision);
+	// int debugIndex = collision->addObserver(physics);
+
+	// //needs to listen to controls
+	// input->addObserver(physics);
+
+	// // collision->removeObserver(debugIndex);
+
+	// /** some solid **/
+	// auto solid = std::make_shared<Entity>();
+	// entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
+	// collisionMap[entityId] = SOLID;
+
+	// solid = std::make_shared<Entity>();
+	// entityId = addEntity(solid, 0, 0, 32, 32, 200, 400, 100, 100, "spritesheet1.png");
+	// collisionMap[entityId] = SOLID;
+
+	// solid = std::make_shared<Entity>();
+	// entityId = addEntity(solid, 0, 0, 32, 32, 300, 400, 100, 100, "spritesheet1.png");
+	// collisionMap[entityId] = SOLID;
 }
 
 void Game::go()

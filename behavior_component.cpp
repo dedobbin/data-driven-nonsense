@@ -4,10 +4,10 @@
 
 BehaviorComponent::~BehaviorComponent()
 {
-	//std::cout << "DEBUG: BehaviorComponent deconstructor called" << std::endl; 
+	std::cout << "DEBUG: BehaviorComponent deconstructor called" << std::endl; 
 }
 
 void BehaviorComponent::notify(std::shared_ptr<Action>)
 {	
-	std::cerr << "Called class component notify" << std::endl;
+	//std::cerr << "Called Component notify" << std::endl;
 }

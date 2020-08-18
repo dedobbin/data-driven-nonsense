@@ -13,14 +13,14 @@ class Entity : public Observer
 	public:
 		~Entity();
 		void live();
-		int addBehaviorComponent(std::shared_ptr<BehaviorComponent> component);
+		void addBehaviorComponent(std::shared_ptr<BehaviorComponent> component);
 		void removeBehaviorcomponent(int index);
 		int spriteId = -1;
 		int id = -1;
 		SDL_Rect pos;
 		void notify(std::shared_ptr<Action> action);
 	private:
-		std::vector<std::weak_ptr<BehaviorComponent>> behaviorComponents;	
+		std::vector<std::shared_ptr<BehaviorComponent>> behaviorComponents;	
 };
 
 #endif

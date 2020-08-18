@@ -22,6 +22,6 @@ void Observer::notify(std::shared_ptr<Action> action)
 void Observer::notifyAll(std::shared_ptr<Action> action)
 {
 	for (auto o : observers){
-			o->notify(action);
+			o.lock()->notify(action);
 	}
 }

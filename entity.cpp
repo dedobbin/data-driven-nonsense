@@ -5,21 +5,23 @@
 
 Entity::~Entity()
 {
-	//std::cout << "DEBUG: Entity deconstructor called" << std::endl; 
+	std::cout << "DEBUG: Entity deconstructor called" << std::endl; 
 }
 
 void Entity::live()
 {
-	for (auto w : behaviorComponents){
-		auto component = w.lock();
-		component->behave();
+	for (auto c : behaviorComponents){
+		c->behave();
 	}
 }
 
-int Entity::addBehaviorComponent(std::shared_ptr<BehaviorComponent> component)
+void Entity::addBehaviorComponent(std::shared_ptr<BehaviorComponent> newComponent)
 {
-	behaviorComponents.push_back(component);
-	return behaviorComponents.size() - 1;
+	behaviorComponents.push_back(newComponent);
+	for (auto c : behaviorComponents){
+		c->addObserver(newComponent);
+		newComponent->addObserver(c);
+	}
 }
 
 void Entity::removeBehaviorcomponent(int index)
