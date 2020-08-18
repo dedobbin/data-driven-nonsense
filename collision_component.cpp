@@ -75,3 +75,15 @@ void CollisionComponent::behave()
 		}
 	}
 }
+
+void CollisionComponent::notify(std::shared_ptr<Action> action)
+{
+	switch (action->type){
+		case MOVE_ENTITY:{
+			auto moveEntityAction = std::static_pointer_cast<MoveEntityAction>(action);
+			pos.x += moveEntityAction->x;
+			pos.y += moveEntityAction->y;
+			break;
+		}
+	}
+}

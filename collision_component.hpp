@@ -18,16 +18,16 @@ class CollisionComponent : public BehaviorComponent
 	public:
 		CollisionComponent(
 			int ownerEntityId,
-			SDL_Rect* pos,	//player is owner, TODO: should go in pos component, which will signal collision component
 			std::vector<std::shared_ptr<Entity>>* colliders, 
 			std::unordered_map<int, collisionActionType_t>* collisionMap
 		);
 		void behave();
 		const int ownerEntityId;
+		void CollisionComponent::notify(std::shared_ptr<Action> action);
 	private:
 		std::vector<std::shared_ptr<Entity>>* colliders; //game is owner
 		std::unordered_map<int, collisionActionType_t>* collisionMap; //game is owner
-		SDL_Rect* pos = NULL;
+		SDL_Rect pos;
 };
 
 #endif

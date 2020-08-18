@@ -6,6 +6,7 @@
 #include <functional>
 #include <memory>
 #include "gravity_component.hpp"
+#include "pos_component.hpp"
 #include "collision_component.hpp"
 #include "physics_component.hpp"
 #include "visuals.hpp"
@@ -23,7 +24,9 @@ void Game::setupAssets()
 	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
 	player->addBehaviorComponent(std::make_shared<GravityComponent>(1.0));
 	player->addBehaviorComponent(std::make_shared<PhysicsComponent>());
-	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player->id, &player->pos, &entities, &collisionMap));
+	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player->id, &entities, &collisionMap));
+	player->addBehaviorComponent(std::make_shared<PosComponent>(SDL_Rect({0, 0, 100, 100})));
+
 
 
 	/** some solids **/

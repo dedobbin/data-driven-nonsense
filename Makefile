@@ -30,6 +30,9 @@ input.o: input.cpp input.hpp
 sdl_utils.o: sdl_utils.cpp sdl_utils.hpp
 	$(GCC) -c sdl_utils.cpp $(COMPILER_FLAGS)
 
+pos_component.o: pos_component.cpp pos_component.hpp
+	$(GCC) -c pos_component.cpp $(COMPILER_FLAGS)
+
 physics_component.o: physics_component.cpp physics_component.hpp
 	$(GCC) -c physics_component.cpp $(COMPILER_FLAGS)
 

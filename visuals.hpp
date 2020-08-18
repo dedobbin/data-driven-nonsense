@@ -15,10 +15,9 @@
 class Sprite
 {
 	public:
-		Sprite(SDL_Rect src, SDL_Rect* pos, SDL_Texture* texture);
+		Sprite(SDL_Rect src, SDL_Rect*, SDL_Texture* texture);
 		~Sprite();
 		const SDL_Rect src;
-		SDL_Rect* pos;	//Owned by entity TODO: smart pointers
 		SDL_Texture* const texture = NULL;
 
 };
