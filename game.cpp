@@ -40,7 +40,7 @@ void Game::setupAssets()
 	int debugIndex = collision->addObserver(physics);
 
 	//needs to listen to controls
-	input->addObserver(player);
+	input->addObserver(physics);
 
 	// collision->removeObserver(debugIndex);
 

@@ -3,7 +3,9 @@
 #include "action.hpp"
 #include "input.hpp"
 
-int speed = 1;
+//TODO: dynamic
+const float increaseAmount = 1.0;
+const float maxRunSpeed = 3.0;
 
 bool Input::process(){
 	SDL_Event e;
@@ -11,17 +13,13 @@ bool Input::process(){
 		if (e.type == SDL_QUIT){
 			return false;
 		} else if (e.type == SDL_KEYDOWN){
-			std::shared_ptr<Action> action;
-			
 			switch(e.key.keysym.sym){
                 case SDLK_LEFT:{
-					speed++;
-					notifyAll(std::make_shared<MoveEntityAction>(speed *-1, 0));
+					notifyAll(std::make_shared<SpeedIncreaseAction>(increaseAmount, 0));
 					break;
 				}
 				case SDLK_RIGHT:{
-					speed ++;
-					notifyAll(std::make_shared<MoveEntityAction>(speed, 0));
+					notifyAll(std::make_shared<SpeedIncreaseAction>(increaseAmount, 0));
 					break;
 				}
 				default:
@@ -34,4 +32,6 @@ bool Input::process(){
 
 
 void Input::notify(std::shared_ptr<Action> action)
-{}
+{
+
+}

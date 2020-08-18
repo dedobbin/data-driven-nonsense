@@ -9,6 +9,8 @@ class Input : public Observer
 	public:
 		bool process();
 		void notify(std::shared_ptr<Action> action);
+	private:
+		float speed = 0.0;
 };
 
 #endif

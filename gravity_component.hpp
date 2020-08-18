@@ -11,7 +11,7 @@ class GravityComponent : public BehaviorComponent
 	private:
 		float force = 0.5;	//force of gravity
 		const float mass;
-		int dir = 2;
+		int dir = 1;
 };
 
 #endif
