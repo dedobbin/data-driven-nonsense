@@ -19,7 +19,6 @@ class Game
 		int addEntity(std::shared_ptr<Entity> entity);
 	private:
 		std::vector<std::shared_ptr<Entity>> entities;
-		std::unordered_map<int, collisionActionType_t> collisionMap; //entity id and collisionType
 		std::unique_ptr<Input> input;
 		std::unique_ptr<Visuals, std::default_delete<Visuals>> visuals;
 

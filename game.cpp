@@ -26,7 +26,7 @@ void Game::setupAssets()
 	int entityId = addEntity(player);
 	player->addBehaviorComponent(std::make_shared<GravityComponent>(1.0));
 	player->addBehaviorComponent(std::make_shared<PhysicsComponent>());
-	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player->id, &entities, &collisionMap));
+	//player->addBehaviorComponent(std::make_shared<CollisionComponent>());
 	player->addBehaviorComponent(std::make_shared<PosComponent>(pos));
 
 	SDL_Texture* sheet = visuals->getSpritesheet("spritesheet1");

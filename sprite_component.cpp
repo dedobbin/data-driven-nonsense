@@ -6,7 +6,7 @@ SpriteComponent::SpriteComponent(SDL_Rect pos, SDL_Rect src, SDL_Texture* textur
 	
 }
 
-void behave()
+void SpriteComponent::behave()
 {}
 
 void SpriteComponent::notify(std::shared_ptr<Action> action)

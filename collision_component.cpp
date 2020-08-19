@@ -50,40 +50,14 @@ bool collision(SDL_Rect A, SDL_Rect B)
     return true;
 }
 
-CollisionComponent::CollisionComponent(
-	int ownerEntityId, 
-	SDL_Rect pos,
-	std::vector<std::shared_ptr<Entity>>* colliders, 
-	std::unordered_map<int, collisionActionType_t>* collisionMap
-)
-: ownerEntityId(ownerEntityId), pos(pos), colliders(colliders), collisionMap(collisionMap)
-{}
+CollisionComponent::CollisionComponent(){}
 
 void CollisionComponent::behave()
 {
-	for (auto collider: *colliders){
-		if (collider->id == ownerEntityId){
-			continue;
-		}
-		std::cout << "DEBUG: player pos in collision component" << pos.x << "," << pos.y << std::endl;
-		if (collision(*pos, collider.pos)){
-			collisionActionType_t collisionType = (*collisionMap)[collider->id];
-			if (collisionType != NONE){
-				auto action = std::make_shared<CollisionAction>(collisionType);
-				notifyAll(action);
-			}
-		}
-	}
+
 }
 
 void CollisionComponent::notify(std::shared_ptr<Action> action)
 {
-	switch (action->type){
-		case MOVE_ENTITY:{
-			auto moveEntityAction = std::static_pointer_cast<MoveEntityAction>(action);
-			pos.x += moveEntityAction->x;
-			pos.y += moveEntityAction->y;
-			break;
-		}
-	}
+
 }

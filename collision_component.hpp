@@ -9,26 +9,14 @@
 #include "action.hpp"
 #include "behavior_component.hpp"
 
-
-
-class Entity;
+//class Entity;
 
 class CollisionComponent : public BehaviorComponent
 {
 	public:
-		CollisionComponent(
-			int ownerEntityId,
-			SDL_Rect pos,
-			std::vector<std::shared_ptr<Entity>>* colliders, 
-			std::unordered_map<int, collisionActionType_t>* collisionMap
-		);
+		CollisionComponent();
 		void behave();
-		const int ownerEntityId;
 		void notify(std::shared_ptr<Action> action);
-	private:
-		std::vector<std::shared_ptr<Entity>>* colliders; //game is owner
-		std::unordered_map<int, collisionActionType_t>* collisionMap; //game is owner
-		SDL_Rect pos;
 };
 
 #endif

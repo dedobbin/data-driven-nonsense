@@ -42,8 +42,8 @@ bool Visuals::loadSpritesheets(std::string path)
 
 bool Visuals::loadSpritesheet(std::string name)
 {
-	auto path = defaultSpritesheetPath + "/" + name;
-	spritesheets[name] = loadTexture(name);
+	auto path = defaultSpritesheetPath + "/" + name + ".png";
+	spritesheets[name] = loadTexture(path);
 }
 
 SDL_Texture* Visuals::getSpritesheet(std::string name)
