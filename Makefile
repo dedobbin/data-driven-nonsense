@@ -1,5 +1,5 @@
 GCC=g++
-OBJ = behavior_component.o entity.o game.o visuals.o action.o sdl_utils.o physics_component.o gravity_component.o collision_component.o observer.o input.o
+OBJ = behavior_component.o entity.o game.o visuals.o action.o sdl_utils.o pos_component.o sprite_component.o physics_component.o gravity_component.o collision_component.o observer.o input.o
 COMPILER_FLAGS = -g -w
 LINKER_FLAGS = -lSDL2 -lSDL2_ttf  -lSDL2_image -lSDL2_mixer -ldump_lib
 
@@ -32,6 +32,9 @@ sdl_utils.o: sdl_utils.cpp sdl_utils.hpp
 
 pos_component.o: pos_component.cpp pos_component.hpp
 	$(GCC) -c pos_component.cpp $(COMPILER_FLAGS)
+
+sprite_component.o: sprite_component.cpp sprite_component.hpp
+	$(GCC) -c sprite_component.cpp $(COMPILER_FLAGS)
 
 physics_component.o: physics_component.cpp physics_component.hpp
 	$(GCC) -c physics_component.cpp $(COMPILER_FLAGS)

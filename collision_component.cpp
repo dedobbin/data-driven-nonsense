@@ -52,7 +52,7 @@ bool collision(SDL_Rect A, SDL_Rect B)
 
 CollisionComponent::CollisionComponent(
 	int ownerEntityId, 
-	SDL_Rect* pos,
+	SDL_Rect pos,
 	std::vector<std::shared_ptr<Entity>>* colliders, 
 	std::unordered_map<int, collisionActionType_t>* collisionMap
 )
@@ -65,8 +65,8 @@ void CollisionComponent::behave()
 		if (collider->id == ownerEntityId){
 			continue;
 		}
-		std::cout << "DEBUG: player pos in collision component" << pos->x << "," << pos->y << std::endl;
-		if (collision(*pos, collider->pos)){
+		std::cout << "DEBUG: player pos in collision component" << pos.x << "," << pos.y << std::endl;
+		if (collision(*pos, collider.pos)){
 			collisionActionType_t collisionType = (*collisionMap)[collider->id];
 			if (collisionType != NONE){
 				auto action = std::make_shared<CollisionAction>(collisionType);

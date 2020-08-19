@@ -6,6 +6,7 @@
 #include <functional>
 #include <memory>
 #include "gravity_component.hpp"
+#include "sprite_component.hpp"
 #include "pos_component.hpp"
 #include "collision_component.hpp"
 #include "physics_component.hpp"
@@ -21,11 +22,18 @@ void Game::setupAssets()
 	//TODO: read from file
 	/** player **/
 	std::shared_ptr<Entity> player = std::make_shared<Entity>();
-	int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
+	auto pos = SDL_Rect({0, 0, 100, 100});
+	int entityId = addEntity(player);
 	player->addBehaviorComponent(std::make_shared<GravityComponent>(1.0));
 	player->addBehaviorComponent(std::make_shared<PhysicsComponent>());
 	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player->id, &entities, &collisionMap));
-	player->addBehaviorComponent(std::make_shared<PosComponent>(SDL_Rect({0, 0, 100, 100})));
+	player->addBehaviorComponent(std::make_shared<PosComponent>(pos));
+
+	SDL_Texture* sheet = visuals->getSpritesheet("spritesheet1");
+	SDL_Rect src({0, 0, 32, 32});
+	auto sprite = std::make_shared<SpriteComponent>(pos, src, sheet);
+	player->addBehaviorComponent(sprite);
+	visuals->addSprite(sprite);
 
 
 
@@ -125,19 +133,8 @@ void Game::go()
 	std::cout << "DEBUG: game end" << std::endl;
 }
 
-int Game::addEntity(std::shared_ptr<Entity> entity, 
-	int srcX, int srcY, int srcW, int srcH,
-	int posX, int posY, int posW, int posH,
-	std::string spritesheetStr
-)
+int Game::addEntity(std::shared_ptr<Entity> entity)
 {
-	entity->pos.w = posW;
-	entity->pos.h = posH;
-	entity->pos.x = posX;
-	entity->pos.y = posY;
-
-	int spriteId = visuals->addSprite({srcX, srcY, srcW, srcH}, &entity->pos, spritesheetStr);
-	entity->spriteId = spriteId;
 	entities.push_back(entity);
 	
 	int id = entities.size() - 1;

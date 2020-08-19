@@ -16,11 +16,7 @@ class Game
 		Game();
 		void setupAssets();
 		void go();
-		int addEntity(std::shared_ptr<Entity> entity, 
-			int srcX, int srcY, int srcW, int srcH,
-			int posX, int posY, int posW, int posH,
-			std::string spritesheetStr
-		);
+		int addEntity(std::shared_ptr<Entity> entity);
 	private:
 		std::vector<std::shared_ptr<Entity>> entities;
 		std::unordered_map<int, collisionActionType_t> collisionMap; //entity id and collisionType

@@ -2,31 +2,18 @@
 #include <dirent.h>
 #include "visuals.hpp"
 
-Sprite::Sprite(SDL_Rect src, SDL_Rect* pos, SDL_Texture* texture)
-:src(src), pos(pos), texture(texture)
-{}
-
-Sprite::~Sprite()
-{
-	//Spritesheets are freed so in visuals, so don't free here
-	//SDL_DestroyTexture(texture);
-}
-
 Visuals::Visuals()
 {
 	if (!initSDL()){
 		exit(1);
 	}
 
-	loadSpritesheets("./assets/spritesheets");
+	defaultSpritesheetPath = "./assets/spritesheets";
+	loadSpritesheets(defaultSpritesheetPath);
 }
 
 Visuals::~Visuals()
 {
-	for (auto sprite : sprites){
-		delete(sprite);
-	}
-
 	for (auto sheet : spritesheets){
 		SDL_DestroyTexture(sheet.second);
 	}
@@ -51,6 +38,20 @@ bool Visuals::loadSpritesheets(std::string path)
 		return false;
 	}
 
+}
+
+bool Visuals::loadSpritesheet(std::string name)
+{
+	auto path = defaultSpritesheetPath + "/" + name;
+	spritesheets[name] = loadTexture(name);
+}
+
+SDL_Texture* Visuals::getSpritesheet(std::string name)
+{
+	if (spritesheets.find(name) == spritesheets.end()){
+		loadSpritesheet(name);
+	}
+	return spritesheets.at(name);
 }
 
 bool Visuals::initSDL()
@@ -147,7 +148,7 @@ void Visuals::render()
 
 	for (auto sprite : sprites){
 		//if (SDL_RenderCopyEx( renderer, sprite->texture, &sprite->src, &sprite->pos , NULL, NULL, sprite->flip) < 0){
-		if (SDL_RenderCopy( renderer, sprite->texture, &sprite->src, sprite->pos) < 0){
+		if (SDL_RenderCopy( renderer, sprite->spritesheet, &sprite->src, &sprite->pos) < 0){
 			std::cerr << "Failed to render sprite " << std::endl;
 		}
 	}
@@ -156,9 +157,8 @@ void Visuals::render()
 
 }
 
-int Visuals::addSprite(SDL_Rect src, SDL_Rect* pos, std::string spritesheetName)
+int Visuals::addSprite(std::shared_ptr<SpriteComponent> sprite)
 {
-	SDL_Texture* spritesheet = spritesheets[spritesheetName];
-	sprites.push_back(new Sprite(src, pos, spritesheet));
+	sprites.push_back(sprite);
 	return sprites.size() - 1;
 }

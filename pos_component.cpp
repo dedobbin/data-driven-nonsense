@@ -4,6 +4,11 @@ PosComponent::PosComponent(SDL_Rect pos)
 : pos(pos)
 {}
 
+void PosComponent::behave()
+{
+
+}
+
 void PosComponent::notify(std::shared_ptr<Action> action)
 {
 	switch (action->type){
