@@ -61,3 +61,5 @@ void CollisionComponent::notify(std::shared_ptr<Action> action)
 {
 
 }
+
+std::vector<CollisionWrapper> CollisionComponent::colMap = {};

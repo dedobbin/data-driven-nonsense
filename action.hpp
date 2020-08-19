@@ -1,6 +1,8 @@
 #ifndef __ACTION_HPP__
 #define __ACTION_HPP__
 
+//TODO: put actions in their own files
+
 enum actionType_t
 {
 	SPEED_INCREASE,
@@ -9,7 +11,7 @@ enum actionType_t
 	QUIT,
 };
 
-enum collisionActionType_t
+enum collisionType_t
 {
 	NONE, //0 should be NONE, so if collisionMap[i] returns NULL, it's seen as NONE
 	SOLID,
@@ -42,8 +44,8 @@ class MoveEntityAction : public Action
 class CollisionAction : public Action
 {
 	public:
-		CollisionAction(collisionActionType_t collisionType);
-		const collisionActionType_t collisionActionType;
+		CollisionAction(collisionType_t collisionType);
+		const collisionType_t collisionType;
 };
 
 #endif

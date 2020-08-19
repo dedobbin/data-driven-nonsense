@@ -9,7 +9,7 @@
 #include "action.hpp"
 #include "behavior_component.hpp"
 
-//class Entity;
+struct CollisionWrapper;
 
 class CollisionComponent : public BehaviorComponent
 {
@@ -17,6 +17,15 @@ class CollisionComponent : public BehaviorComponent
 		CollisionComponent();
 		void behave();
 		void notify(std::shared_ptr<Action> action);
+	private:
+		static std::vector<CollisionWrapper> colMap;
+};
+
+struct CollisionWrapper 
+{
+	int entityId = -1;
+	std::shared_ptr<CollisionComponent> col;
+	collisionType_t type = NONE;
 };
 
 #endif
