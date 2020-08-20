@@ -19,8 +19,8 @@ class Game
 		int addEntity(std::shared_ptr<Entity> entity);
 	private:
 		std::vector<std::shared_ptr<Entity>> entities;
-		std::unique_ptr<Input> input;
-		std::unique_ptr<Visuals, std::default_delete<Visuals>> visuals;
+		std::shared_ptr<Input> input;
+		std::unique_ptr<Visuals> visuals;
 
 		bool initSDL();
 		LazyFooTimer capTimer;

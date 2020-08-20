@@ -9,6 +9,7 @@
 #include "sprite_component.hpp"
 #include "pos_component.hpp"
 #include "collision_component.hpp"
+#include "input_component.hpp"
 #include "physics_component.hpp"
 #include "visuals.hpp"
 #include "game.hpp"
@@ -16,6 +17,7 @@
 Game::Game()
 {
 	visuals = std::make_unique<Visuals>();
+	input = std::make_shared<Input>();
 }
 void Game::setupAssets()
 {
@@ -33,6 +35,7 @@ void Game::setupAssets()
 	player->addBehaviorComponent(std::make_shared<PhysicsComponent>(player.get()));
 	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player.get(), playerPos, PLAYER));
 	player->addBehaviorComponent(std::make_shared<PosComponent>(player.get(), playerPos));
+	player->addBehaviorComponent(std::make_shared<InputComponent>(player.get(), input));
 	auto sprite = std::make_shared<SpriteComponent>(player.get(), playerPos, playerSpriteSrc, sheet1);
 	player->addBehaviorComponent(sprite);
 	
@@ -59,7 +62,6 @@ void Game::go()
 	const int FPS = 60;
 	const int SCREEN_TICK_PER_FRAME = 1000 / FPS;
 	
-	input = std::make_unique<Input>();
 	setupAssets();
 
 	keepGoing = true;
