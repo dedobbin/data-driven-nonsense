@@ -20,75 +20,37 @@ Game::Game()
 void Game::setupAssets()
 {
 	//TODO: read from file
+	SDL_Texture* sheet1 = visuals->getSpritesheet("spritesheet1");
+
 	/** player **/
 	std::shared_ptr<Entity> player = std::make_shared<Entity>();
-	auto pos = SDL_Rect({0, 0, 100, 100});
 	int entityId = addEntity(player);
+
+	SDL_Rect playerPos({0, 0, 100, 100});
+	SDL_Rect playerSpriteSrc({0, 0, 32, 32});
+	
 	player->addBehaviorComponent(std::make_shared<GravityComponent>(player.get(), 1.0));
 	player->addBehaviorComponent(std::make_shared<PhysicsComponent>(player.get()));
 	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player.get(), PLAYER));
-	player->addBehaviorComponent(std::make_shared<PosComponent>(player.get(), pos));
-
-	SDL_Texture* sheet = visuals->getSpritesheet("spritesheet1");
-	SDL_Rect src({0, 0, 32, 32});
-	auto sprite = std::make_shared<SpriteComponent>(player.get(), pos, src, sheet);
+	player->addBehaviorComponent(std::make_shared<PosComponent>(player.get(), playerPos));
+	auto sprite = std::make_shared<SpriteComponent>(player.get(), playerPos, playerSpriteSrc, sheet1);
 	player->addBehaviorComponent(sprite);
+	
 	visuals->addSprite(sprite);
 
-
-
 	/** some solids **/
-	// auto solid = std::make_shared<Entity>();
-	// entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
-	// collisionMap[entityId] = SOLID;
+	auto solid = std::make_shared<Entity>();
+	entityId = addEntity(solid);
 
-	// solid = std::make_shared<Entity>();
-	// entityId = addEntity(solid, 0, 0, 32, 32, 200, 400, 100, 100, "spritesheet1.png");
-	// collisionMap[entityId] = SOLID;
+	SDL_Rect solidSpriteSrc({0, 0, 32, 32});
+	SDL_Rect solidPos({0, 400, 100, 100});
+	
+	auto solidSprite = std::make_shared<SpriteComponent>(solid.get(), solidPos, solidSpriteSrc, sheet1);
+	solid->addBehaviorComponent(solidSprite);
+	solid->addBehaviorComponent(std::make_shared<PosComponent>(solid.get(), solidPos));
+	player->addBehaviorComponent(std::make_shared<CollisionComponent>(solid.get(), SOLID));
 
-	// solid = std::make_shared<Entity>();
-	// entityId = addEntity(solid, 0, 0, 32, 32, 300, 400, 100, 100, "spritesheet1.png");
-	// collisionMap[entityId] = SOLID;
-
-
-
-	/** player **/
-	// std::shared_ptr<Entity> player = std::make_shared<Entity>();
-	// int entityId = addEntity(player, 0, 0, 32, 32, 100, 0, 100, 100, "spritesheet1.png");
-	// float playerMass = 1.0;
-
-	// auto gravity = std::make_shared<GravityComponent>(playerMass);
-	// componentPool.push_back(gravity);
-	// player->addBehaviorComponent(gravity);
-
-	// auto physics = std::make_shared<PhysicsComponent>();
-	// componentPool.push_back(physics);
-	// gravity->addObserver(physics);
-	// player->addBehaviorComponent(physics);
-	// physics->addObserver(player);
-
-	// auto collision = std::make_shared<CollisionComponent>(player, &entities, &collisionMap);
-	// componentPool.push_back(collision);
-	// player->addBehaviorComponent(collision);
-	// int debugIndex = collision->addObserver(physics);
-
-	// //needs to listen to controls
-	// input->addObserver(physics);
-
-	// // collision->removeObserver(debugIndex);
-
-	// /** some solid **/
-	// auto solid = std::make_shared<Entity>();
-	// entityId = addEntity(solid, 0, 0, 32, 32, 100, 400, 100, 100, "spritesheet1.png");
-	// collisionMap[entityId] = SOLID;
-
-	// solid = std::make_shared<Entity>();
-	// entityId = addEntity(solid, 0, 0, 32, 32, 200, 400, 100, 100, "spritesheet1.png");
-	// collisionMap[entityId] = SOLID;
-
-	// solid = std::make_shared<Entity>();
-	// entityId = addEntity(solid, 0, 0, 32, 32, 300, 400, 100, 100, "spritesheet1.png");
-	// collisionMap[entityId] = SOLID;
+	visuals->addSprite(solidSprite);
 }
 
 void Game::go()
