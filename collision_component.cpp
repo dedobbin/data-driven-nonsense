@@ -80,7 +80,8 @@ void CollisionComponent::notify(std::shared_ptr<Action> action)
 			}
 			//std::cout << "DEBUG" << pos.x << "," << pos.y << " - " << iter->second.col->pos.x << "," << iter->second.col->pos.y << std::endl;
 			if (collision(pos, iter->second.col->pos)){
-				std::cout << "DEBUG: COLLISION" << std::endl;
+				//std::cout << "DEBUG: COLLISION" << std::endl;
+				notifyAll(std::make_shared<CollisionAction>(iter->second.type));
 			}
 		}
 	}
