@@ -72,12 +72,13 @@ void CollisionComponent::notify(std::shared_ptr<Action> action)
 	if (action->type == MOVE_ENTITY){
 		auto moveEntityAction = std::static_pointer_cast<MoveEntityAction>(action);
 		//TODO: check collision
-		pos.x = moveEntityAction->x;
-		pos.y = moveEntityAction->y;
+		pos.x += moveEntityAction->x;
+		pos.y += moveEntityAction->y;
 		for(auto iter = colMap.begin(); iter != colMap.end(); ++iter){
 			if (iter->first == owner->id){
 				continue;
 			}
+			//std::cout << "DEBUG" << pos.x << "," << pos.y << " - " << iter->second.col->pos.x << "," << iter->second.col->pos.y << std::endl;
 			if (collision(pos, iter->second.col->pos)){
 				std::cout << "DEBUG: COLLISION" << std::endl;
 			}
