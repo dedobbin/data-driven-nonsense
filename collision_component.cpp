@@ -50,8 +50,8 @@ bool collision(SDL_Rect A, SDL_Rect B)
     return true;
 }
 
-CollisionComponent::CollisionComponent(Entity* owner, collisionType_t type)
-:BehaviorComponent(owner)
+CollisionComponent::CollisionComponent(Entity* owner, SDL_Rect pos, collisionType_t type)
+:pos(pos), BehaviorComponent(owner)
 {
 	CollisionWrapper wrapper({this, type});
 	colMap[owner->id] = wrapper;
@@ -69,7 +69,20 @@ void CollisionComponent::behave()
 
 void CollisionComponent::notify(std::shared_ptr<Action> action)
 {
-
+	if (action->type == MOVE_ENTITY){
+		auto moveEntityAction = std::static_pointer_cast<MoveEntityAction>(action);
+		//TODO: check collision
+		pos.x = moveEntityAction->x;
+		pos.y = moveEntityAction->y;
+		for(auto iter = colMap.begin(); iter != colMap.end(); ++iter){
+			if (iter->first == owner->id){
+				continue;
+			}
+			if (collision(pos, iter->second.col->pos)){
+				std::cout << "DEBUG: COLLISION" << std::endl;
+			}
+		}
+	}
 }
 
 std::unordered_map<int, CollisionWrapper> CollisionComponent::colMap = {};

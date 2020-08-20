@@ -31,7 +31,7 @@ void Game::setupAssets()
 	
 	player->addBehaviorComponent(std::make_shared<GravityComponent>(player.get(), 1.0));
 	player->addBehaviorComponent(std::make_shared<PhysicsComponent>(player.get()));
-	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player.get(), PLAYER));
+	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player.get(), playerPos, PLAYER));
 	player->addBehaviorComponent(std::make_shared<PosComponent>(player.get(), playerPos));
 	auto sprite = std::make_shared<SpriteComponent>(player.get(), playerPos, playerSpriteSrc, sheet1);
 	player->addBehaviorComponent(sprite);
@@ -48,7 +48,7 @@ void Game::setupAssets()
 	auto solidSprite = std::make_shared<SpriteComponent>(solid.get(), solidPos, solidSpriteSrc, sheet1);
 	solid->addBehaviorComponent(solidSprite);
 	solid->addBehaviorComponent(std::make_shared<PosComponent>(solid.get(), solidPos));
-	player->addBehaviorComponent(std::make_shared<CollisionComponent>(solid.get(), SOLID));
+	solid->addBehaviorComponent(std::make_shared<CollisionComponent>(solid.get(), solidPos, SOLID));
 
 	visuals->addSprite(solidSprite);
 }
