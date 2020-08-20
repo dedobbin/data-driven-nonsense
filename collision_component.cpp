@@ -71,7 +71,6 @@ void CollisionComponent::notify(std::shared_ptr<Action> action)
 {
 	if (action->type == MOVE_ENTITY){
 		auto moveEntityAction = std::static_pointer_cast<MoveEntityAction>(action);
-		//TODO: check collision
 		pos.x += moveEntityAction->x;
 		pos.y += moveEntityAction->y;
 		for(auto iter = colMap.begin(); iter != colMap.end(); ++iter){
