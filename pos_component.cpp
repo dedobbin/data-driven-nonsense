@@ -1,7 +1,7 @@
 #include "pos_component.hpp"
 
-PosComponent::PosComponent(SDL_Rect pos)
-: pos(pos)
+PosComponent::PosComponent(Entity* owner, SDL_Rect pos)
+: BehaviorComponent(owner), pos(pos)
 {}
 
 void PosComponent::behave()

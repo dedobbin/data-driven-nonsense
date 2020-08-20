@@ -4,7 +4,7 @@
 #include "entity.hpp"
 
 Entity::~Entity()
-{
+{	
 	std::cout << "DEBUG: Entity deconstructor called" << std::endl; 
 }
 

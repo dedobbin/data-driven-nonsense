@@ -15,6 +15,7 @@ enum collisionType_t
 {
 	NONE, //0 should be NONE, so if collisionMap[i] returns NULL, it's seen as NONE
 	SOLID,
+	PLAYER,
 };
 
 class Action 

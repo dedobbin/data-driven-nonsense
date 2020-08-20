@@ -8,9 +8,9 @@
 class SpriteComponent : public BehaviorComponent
 {
 	public:
+		SpriteComponent(Entity* owner, SDL_Rect pos, SDL_Rect src, SDL_Texture* texture);
 		void notify(std::shared_ptr<Action> action);
 		void behave();
-		SpriteComponent(SDL_Rect pos, SDL_Rect src, SDL_Texture* texture);
 		SDL_Rect src;
 		SDL_Texture* spritesheet = NULL;
 		SDL_Rect pos;

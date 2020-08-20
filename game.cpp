@@ -24,14 +24,14 @@ void Game::setupAssets()
 	std::shared_ptr<Entity> player = std::make_shared<Entity>();
 	auto pos = SDL_Rect({0, 0, 100, 100});
 	int entityId = addEntity(player);
-	player->addBehaviorComponent(std::make_shared<GravityComponent>(1.0));
-	player->addBehaviorComponent(std::make_shared<PhysicsComponent>());
-	player->addBehaviorComponent(std::make_shared<CollisionComponent>());
-	player->addBehaviorComponent(std::make_shared<PosComponent>(pos));
+	player->addBehaviorComponent(std::make_shared<GravityComponent>(player.get(), 1.0));
+	player->addBehaviorComponent(std::make_shared<PhysicsComponent>(player.get()));
+	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player.get(), PLAYER));
+	player->addBehaviorComponent(std::make_shared<PosComponent>(player.get(), pos));
 
 	SDL_Texture* sheet = visuals->getSpritesheet("spritesheet1");
 	SDL_Rect src({0, 0, 32, 32});
-	auto sprite = std::make_shared<SpriteComponent>(pos, src, sheet);
+	auto sprite = std::make_shared<SpriteComponent>(player.get(), pos, src, sheet);
 	player->addBehaviorComponent(sprite);
 	visuals->addSprite(sprite);
 

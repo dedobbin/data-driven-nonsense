@@ -7,7 +7,7 @@
 class PosComponent : public BehaviorComponent
 {
 	public:
-		PosComponent(SDL_Rect pos);
+		PosComponent(Entity* owner, SDL_Rect pos);
 		void behave();
 		void notify(std::shared_ptr<Action> action);
 

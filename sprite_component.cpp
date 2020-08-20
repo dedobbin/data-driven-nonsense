@@ -1,7 +1,7 @@
 #include "sprite_component.hpp"
 
-SpriteComponent::SpriteComponent(SDL_Rect pos, SDL_Rect src, SDL_Texture* texture)
-: src(src), pos(pos), spritesheet(texture)
+SpriteComponent::SpriteComponent(Entity* owner, SDL_Rect pos, SDL_Rect src, SDL_Texture* texture)
+: BehaviorComponent(owner), src(src), pos(pos), spritesheet(texture)
 {
 	
 }

@@ -1,9 +1,8 @@
 #include <iostream>
 #include "gravity_component.hpp"
-#include "entity.hpp"
 
-GravityComponent::GravityComponent(float mass)
-: mass(mass)
+GravityComponent::GravityComponent(Entity* owner, float mass)
+: BehaviorComponent(owner), mass(mass)
 {}
 
 void GravityComponent::behave()

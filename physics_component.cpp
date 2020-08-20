@@ -2,6 +2,9 @@
 #include "helpers.hpp"
 #include "physics_component.hpp"
 
+PhysicsComponent::PhysicsComponent(Entity* owner)
+:BehaviorComponent(owner)
+{}
 
 void PhysicsComponent::behave()
 {
@@ -55,7 +58,7 @@ void PhysicsComponent::notify(std::shared_ptr<Action> action)
 		}
 		case COLLISION :{
 			auto collisionAction = std::static_pointer_cast<CollisionAction>(action);
-			switch (collisionAction->collisionActionType){
+			switch (collisionAction->collisionType){
 				case SOLID:{
 					hasSolidCollision = true;
 					break;
