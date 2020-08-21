@@ -44,18 +44,22 @@ void Game::setupAssets()
 	visuals->addSprite(sprite);
 
 	/** some solids **/
-	auto solid = std::make_shared<Entity>();
-	entityId = addEntity(solid);
-
-	SDL_Rect solidSpriteSrc({0, 0, 32, 32});
 	SDL_Rect solidPos({0, 400, 100, 100});
-	
-	auto solidSprite = std::make_shared<SpriteComponent>(solid.get(), solidPos, solidSpriteSrc, sheet1);
-	solid->addBehaviorComponent(solidSprite);
-	solid->addBehaviorComponent(std::make_shared<PosComponent>(solid.get(), solidPos));
-	solid->addBehaviorComponent(std::make_shared<CollisionComponent>(solid.get(), solidPos, SOLID));
+	for (int i = 0; i < 10; i++){
+		auto solid = std::make_shared<Entity>();
+		entityId = addEntity(solid);
 
-	visuals->addSprite(solidSprite);
+		SDL_Rect solidSpriteSrc({0, 0, 32, 32});
+		
+		auto solidSprite = std::make_shared<SpriteComponent>(solid.get(), solidPos, solidSpriteSrc, sheet1);
+		solid->addBehaviorComponent(solidSprite);
+		solid->addBehaviorComponent(std::make_shared<PosComponent>(solid.get(), solidPos));
+		solid->addBehaviorComponent(std::make_shared<CollisionComponent>(solid.get(), solidPos, SOLID));
+
+		visuals->addSprite(solidSprite);
+
+		solidPos.x += 100;
+	}
 }
 
 void Game::go()
