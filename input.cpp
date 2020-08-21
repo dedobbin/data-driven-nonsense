@@ -13,18 +13,9 @@ bool Input::process(){
 		if (e.type == SDL_QUIT){
 			return false;
 		} else if (e.type == SDL_KEYDOWN){
-			switch(e.key.keysym.sym){
-                case SDLK_LEFT:{
-					notifyAll(std::make_shared<SpeedIncreaseAction>(increaseAmount, 0));
-					break;
-				}
-				case SDLK_RIGHT:{
-					notifyAll(std::make_shared<SpeedIncreaseAction>(increaseAmount, 0));
-					break;
-				}
-				default:
-					break;
-			}
+			notifyAll(std::make_shared<KeyPressAction>(e.key.keysym.scancode, true));
+		} else {
+			notifyAll(std::make_shared<KeyPressAction>(e.key.keysym.scancode, false));
 		}
 	}
 	return true;

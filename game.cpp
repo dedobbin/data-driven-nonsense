@@ -35,7 +35,9 @@ void Game::setupAssets()
 	player->addBehaviorComponent(std::make_shared<PhysicsComponent>(player.get()));
 	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player.get(), playerPos, PLAYER));
 	player->addBehaviorComponent(std::make_shared<PosComponent>(player.get(), playerPos));
-	player->addBehaviorComponent(std::make_shared<InputComponent>(player.get(), input));
+	auto inputComponent = std::make_shared<InputComponent>(player.get());
+	player->addBehaviorComponent(inputComponent);
+	input->addObserver(inputComponent);
 	auto sprite = std::make_shared<SpriteComponent>(player.get(), playerPos, playerSpriteSrc, sheet1);
 	player->addBehaviorComponent(sprite);
 	

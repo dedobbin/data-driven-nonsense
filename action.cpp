@@ -23,3 +23,7 @@ MoveEntityAction::MoveEntityAction(float x, float y)
 CollisionAction::CollisionAction(collisionType_t collisionType)
 : Action (COLLISION), collisionType(collisionType)
 {}
+
+KeyPressAction::KeyPressAction(int scanCode, bool down)
+: Action(KEY_PRESS), scanCode(scanCode), down(down)
+{}

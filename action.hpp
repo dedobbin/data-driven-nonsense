@@ -9,6 +9,7 @@ enum actionType_t
 	MOVE_ENTITY,
 	COLLISION,
 	QUIT,
+	KEY_PRESS
 };
 
 enum collisionType_t
@@ -47,6 +48,14 @@ class CollisionAction : public Action
 	public:
 		CollisionAction(collisionType_t collisionType);
 		const collisionType_t collisionType;
+};
+
+class KeyPressAction : public Action
+{
+	public:
+		KeyPressAction(int scanCode, bool down); //true = down, false = released
+		const int scanCode;
+		const bool down;
 };
 
 #endif
