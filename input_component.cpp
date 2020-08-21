@@ -3,6 +3,7 @@
 
 #include "input_component.hpp"
 
+float speedIncrease = 1.0;
 
 InputComponent::InputComponent(Entity* owner)
 :BehaviorComponent(owner)
@@ -14,8 +15,8 @@ InputComponent::InputComponent(Entity* owner)
 
 void InputComponent::behave()
 {
-	if (keysDown[SDL_SCANCODE_SPACE]){
-		std::cout << "DEBUG: space is down" << std::endl;
+	if (keysDown[SDL_SCANCODE_RIGHT]){
+		notifyAll(std::make_shared<SpeedIncreaseAction>(speedIncrease, 0));
 	}
 }
 
