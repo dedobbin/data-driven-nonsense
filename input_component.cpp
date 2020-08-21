@@ -31,7 +31,7 @@ void InputComponent::notify(std::shared_ptr<Action> action)
 		}
 		case SET_PROPERTY: {
 			auto setPropertyAction = std::static_pointer_cast<SetPropertyAction>(action);
-			if (setPropertyAction->type == X_SPEED){
+			if (setPropertyAction->propertyType == X_SPEED){
 				xSpeed = setPropertyAction->value;
 				std::cout << "DEBUG: x speed: " << xSpeed << std::endl;
 			}

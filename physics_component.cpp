@@ -4,7 +4,11 @@
 
 PhysicsComponent::PhysicsComponent(Entity* owner)
 :BehaviorComponent(owner)
-{}
+{
+	notifyAll(std::make_shared<SetPropertyAction>(Y_SPEED, xSpeed));	
+	notifyAll(std::make_shared<SetPropertyAction>(Y_SPEED, xSpeed));	
+
+}
 
 void PhysicsComponent::behave()
 {
