@@ -4,7 +4,7 @@
 #include "input_component.hpp"
 
 float speedIncrease = 1.0;
-float maxRunSpeed = 3.0;
+float maxRunSpeed = 10.0;
 
 InputComponent::InputComponent(Entity* owner, float xSpeed, float ySpeed)
 :BehaviorComponent(owner), xSpeed(xSpeed), ySpeed(ySpeed)
@@ -20,12 +20,18 @@ void InputComponent::behave()
 		if (xSpeed < maxRunSpeed){
 			notifyAll(std::make_shared<SpeedIncreaseAction>(speedIncrease, 0));
 		}
+	} else if (xSpeed > 0){
+		notifyAll(std::make_shared<SpeedIncreaseAction>(-1, 0));
 	} 
 	if (keysDown[SDL_SCANCODE_LEFT]){
 		if (xSpeed > -maxRunSpeed){
 			notifyAll(std::make_shared<SpeedIncreaseAction>(-speedIncrease, 0));
 		}
-	} 
+	} else if (xSpeed < 0){
+		notifyAll(std::make_shared<SpeedIncreaseAction>(1, 0));
+	}
+
+
 
 }
 
