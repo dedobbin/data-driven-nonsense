@@ -37,9 +37,9 @@ class Action
 class SetPropertyAction : public Action
 {
 	public:
-		SetPropertyAction(propertyType_t propertyType, int value);
+		SetPropertyAction(propertyType_t propertyType, float floatValue);
 		const propertyType_t propertyType;
-		const int value;	
+		const float floatValue;	
 };
 
 class SpeedIncreaseAction : public Action

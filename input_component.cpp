@@ -5,6 +5,7 @@
 
 float speedIncrease = 1.0;
 float maxRunSpeed = 10.0;
+float slowdownSpeed = 0.4;
 
 InputComponent::InputComponent(Entity* owner, float xSpeed, float ySpeed)
 :BehaviorComponent(owner), xSpeed(xSpeed), ySpeed(ySpeed)
@@ -21,14 +22,14 @@ void InputComponent::behave()
 			notifyAll(std::make_shared<SpeedIncreaseAction>(speedIncrease, 0));
 		}
 	} else if (xSpeed > 0){
-		notifyAll(std::make_shared<SpeedIncreaseAction>(-1, 0));
+		notifyAll(std::make_shared<SpeedIncreaseAction>(-slowdownSpeed, 0));
 	} 
 	if (keysDown[SDL_SCANCODE_LEFT]){
 		if (xSpeed > -maxRunSpeed){
 			notifyAll(std::make_shared<SpeedIncreaseAction>(-speedIncrease, 0));
 		}
 	} else if (xSpeed < 0){
-		notifyAll(std::make_shared<SpeedIncreaseAction>(1, 0));
+		notifyAll(std::make_shared<SpeedIncreaseAction>(slowdownSpeed, 0));
 	}
 
 
@@ -45,9 +46,9 @@ void InputComponent::notify(std::shared_ptr<Action> action)
 		}
 		case SET_PROPERTY: {
 			auto setPropertyAction = std::static_pointer_cast<SetPropertyAction>(action);
-			std::cout << "DEBUG: xspeed: " << xSpeed << std::endl;
+			//std::cout << "DEBUG: xspeed: " << xSpeed << std::endl;
 			if (setPropertyAction->propertyType == X_SPEED){
-				xSpeed = setPropertyAction->value;
+				xSpeed = setPropertyAction->floatValue;
 			}
 		}
 	}
