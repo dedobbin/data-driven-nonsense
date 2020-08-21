@@ -22,7 +22,8 @@ enum collisionType_t
 
 enum propertyType_t
 {
-	SPEED
+	X_SPEED,
+	Y_SPEED
 };
 
 class Action 

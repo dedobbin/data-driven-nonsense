@@ -12,6 +12,7 @@ class InputComponent : public BehaviorComponent
 		void notify(std::shared_ptr<Action> action);
 	private:
 		std::unordered_map<int, bool> keysDown;//scancode and false = up, true = down
+		float xSpeed = 0;
 };
 
 #endif

@@ -31,10 +31,12 @@ void PhysicsComponent::notify(std::shared_ptr<Action> action)
 			float amount = speedIncreaseAction->speed;
 			if (speedIncreaseAction->dir == 0){
 				xSpeed += amount;
-				lastMoveDir = LAST_MOVE_DIR_X;	
+				lastMoveDir = LAST_MOVE_DIR_X;
+				notifyAll(std::make_shared<SetPropertyAction>(X_SPEED, xSpeed));	
 			} else if (speedIncreaseAction->dir == 1){
 				ySpeed += amount;
 				lastMoveDir = LAST_MOVE_DIR_Y;	
+				notifyAll(std::make_shared<SetPropertyAction>(Y_SPEED, ySpeed));	
 			}
 			// switch (speedIncreaseAction->dir){
 			// 	case 0:
