@@ -12,6 +12,12 @@ Action::~Action()
 	//std::cout << "DEBUG: Action deconstructor called" << std::endl; 
 }
 
+SetPropertyAction::SetPropertyAction(propertyType_t propertyType, int value)
+:Action(SET_PROPERTY), propertyType(propertyType), value(value)
+{
+
+}
+
 SpeedIncreaseAction::SpeedIncreaseAction(float speed, int dir)
 : Action (SPEED_INCREASE), speed(speed), dir(dir)
 {}

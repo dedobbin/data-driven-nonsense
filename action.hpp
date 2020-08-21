@@ -9,14 +9,20 @@ enum actionType_t
 	MOVE_ENTITY,
 	COLLISION,
 	QUIT,
-	KEY_PRESS
+	KEY_PRESS,
+	SET_PROPERTY
 };
 
 enum collisionType_t
 {
-	NONE, //0 should be NONE, so if collisionMap[i] returns NULL, it's seen as NONE
+	NONE, //0 should be NONE, so if collisionMap[i] returns NULL, it's seen as NONE, although i think this got refactored into oblivion
 	SOLID,
 	PLAYER,
+};
+
+enum propertyType_t
+{
+	SPEED
 };
 
 class Action 
@@ -25,6 +31,14 @@ class Action
 		Action(actionType_t type);
 		~Action();
 		const actionType_t type;
+};
+
+class SetPropertyAction : public Action
+{
+	public:
+		SetPropertyAction(propertyType_t propertyType, int value);
+		const propertyType_t propertyType;
+		const int value;	
 };
 
 class SpeedIncreaseAction : public Action
