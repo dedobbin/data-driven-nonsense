@@ -9,7 +9,7 @@
 class PhysicsComponent : public BehaviorComponent
 {
 	public:
-		PhysicsComponent(Entity* owner);
+		PhysicsComponent(Entity* owner, float xSpeed, float ySpeed);
 		void behave();
 		void notify(std::shared_ptr<Action> action);
 	private:

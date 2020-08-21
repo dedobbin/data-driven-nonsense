@@ -2,13 +2,9 @@
 #include "helpers.hpp"
 #include "physics_component.hpp"
 
-PhysicsComponent::PhysicsComponent(Entity* owner)
-:BehaviorComponent(owner)
-{
-	notifyAll(std::make_shared<SetPropertyAction>(Y_SPEED, xSpeed));	
-	notifyAll(std::make_shared<SetPropertyAction>(Y_SPEED, xSpeed));	
-
-}
+PhysicsComponent::PhysicsComponent(Entity* owner, float xSpeed, float ySpeed)
+:BehaviorComponent(owner), xSpeed(xSpeed), ySpeed(ySpeed)
+{}
 
 void PhysicsComponent::behave()
 {

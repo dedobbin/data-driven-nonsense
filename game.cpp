@@ -30,12 +30,14 @@ void Game::setupAssets()
 
 	SDL_Rect playerPos({0, 0, 100, 100});
 	SDL_Rect playerSpriteSrc({0, 0, 32, 32});
+	int playerXSpeed = 0;
+	int playerYSpeed = 0;
 	
 	player->addBehaviorComponent(std::make_shared<GravityComponent>(player.get(), 1.0));
-	player->addBehaviorComponent(std::make_shared<PhysicsComponent>(player.get()));
+	player->addBehaviorComponent(std::make_shared<PhysicsComponent>(player.get(), playerXSpeed, playerYSpeed));
 	player->addBehaviorComponent(std::make_shared<CollisionComponent>(player.get(), playerPos, PLAYER));
 	player->addBehaviorComponent(std::make_shared<PosComponent>(player.get(), playerPos));
-	auto inputComponent = std::make_shared<InputComponent>(player.get());
+	auto inputComponent = std::make_shared<InputComponent>(player.get(), playerXSpeed, playerYSpeed);
 	player->addBehaviorComponent(inputComponent);
 	input->addObserver(inputComponent);
 	auto sprite = std::make_shared<SpriteComponent>(player.get(), playerPos, playerSpriteSrc, sheet1);

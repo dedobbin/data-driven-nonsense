@@ -6,8 +6,8 @@
 float speedIncrease = 1.0;
 float maxRunSpeed = 3.0;
 
-InputComponent::InputComponent(Entity* owner)
-:BehaviorComponent(owner)
+InputComponent::InputComponent(Entity* owner, float xSpeed, float ySpeed)
+:BehaviorComponent(owner), xSpeed(xSpeed), ySpeed(ySpeed)
 {
 	for (int i = 0; i < SDL_NUM_SCANCODES; i++){
 		keysDown[i] = false; 
@@ -17,8 +17,16 @@ InputComponent::InputComponent(Entity* owner)
 void InputComponent::behave()
 {
 	if (keysDown[SDL_SCANCODE_RIGHT]){
-		notifyAll(std::make_shared<SpeedIncreaseAction>(speedIncrease, 0));
-	}
+		if (xSpeed < maxRunSpeed){
+			notifyAll(std::make_shared<SpeedIncreaseAction>(speedIncrease, 0));
+		}
+	} 
+	if (keysDown[SDL_SCANCODE_LEFT]){
+		if (xSpeed > -maxRunSpeed){
+			notifyAll(std::make_shared<SpeedIncreaseAction>(-speedIncrease, 0));
+		}
+	} 
+
 }
 
 void InputComponent::notify(std::shared_ptr<Action> action)
@@ -31,9 +39,9 @@ void InputComponent::notify(std::shared_ptr<Action> action)
 		}
 		case SET_PROPERTY: {
 			auto setPropertyAction = std::static_pointer_cast<SetPropertyAction>(action);
+			std::cout << "DEBUG: xspeed: " << xSpeed << std::endl;
 			if (setPropertyAction->propertyType == X_SPEED){
 				xSpeed = setPropertyAction->value;
-				std::cout << "DEBUG: x speed: " << xSpeed << std::endl;
 			}
 		}
 	}
