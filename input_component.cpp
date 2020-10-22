@@ -31,9 +31,6 @@ void InputComponent::behave()
 	} else if (xSpeed < 0){
 		notifyAll(std::make_shared<SpeedIncreaseAction>(slowdownSpeed, 0));
 	}
-
-
-
 }
 
 void InputComponent::notify(std::shared_ptr<Action> action)
